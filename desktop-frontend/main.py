@@ -6,7 +6,7 @@ from ui.styles import STYLESHEET
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyle('Fusion')
-    # app.setStyleSheet(STYLESHEET) 
+    app.setStyleSheet(STYLESHEET) 
     # Note: Stylesheet is applied to windows individually or can be global here.
     # AuthWindow applies it to itself.
     

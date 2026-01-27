@@ -119,4 +119,31 @@ QFrame#Card {
     border: 1px solid #e2e8f0;
     border-radius: 16px;
 }
+QComboBox {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 6px 12px;
+    background-color: white;
+    color: #334155;
+    font-weight: 600;
+}
+QComboBox:hover {
+    border: 1px solid #94a3b8;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left-width: 1px;
+    border-left-color: transparent; 
+    border-top-right-radius: 3px; 
+    border-bottom-right-radius: 3px;
+}
+QComboBox QAbstractItemView {
+    border: 1px solid #cbd5e1;
+    background-color: white;
+    selection-background-color: #f1f5f9;
+    selection-color: #0f172a;
+    outline: none;
+}
 """
