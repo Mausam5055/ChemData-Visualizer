@@ -224,58 +224,105 @@ export default function Analysis({ datasetId }) {
 
             {/* Overview Mode */}
             {viewMode === 'overview' && (
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div className="lg:col-span-2 relative">
-                        <div className="absolute top-6 right-6 z-10">
-                            <select 
-                                value={barMetric} 
-                                onChange={(e) => setBarMetric(e.target.value)}
-                                className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-1 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer"
-                            >
-                                <option value="flowrate">Flowrate</option>
-                                <option value="pressure">Pressure</option>
-                                <option value="temperature">Temperature</option>
-                            </select>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+                    {/* Top Row */}
+                    <div className="lg:col-span-2 flex flex-col">
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-full">
+                            <div className="flex justify-between items-center mb-4">
+                                <h3 className="text-lg font-bold text-slate-800">
+                                    {`Average ${barMetric.charAt(0).toUpperCase() + barMetric.slice(1)} by Equipment`}
+                                </h3>
+                                <select 
+                                    value={barMetric} 
+                                    onChange={(e) => setBarMetric(e.target.value)}
+                                    className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-1.5 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer hover:bg-slate-100 transition-colors"
+                                >
+                                    <option value="flowrate">Flowrate</option>
+                                    <option value="pressure">Pressure</option>
+                                    <option value="temperature">Temperature</option>
+                                </select>
+                            </div>
+                            <div className="flex-1 min-h-[300px]">
+                                <BarChart 
+                                    data={getBarData(barMetric)} 
+                                    title="" // Title handled by parent for layout control
+                                />
+                            </div>
                         </div>
-                        <BarChart 
-                            data={getBarData(barMetric)} 
-                            title={`Average ${barMetric.charAt(0).toUpperCase() + barMetric.slice(1)} by Equipment`} 
-                        />
                     </div>
-                    <div>
-                        <DistributionChart data={stats.type_distribution} />
+
+                    <div className="flex flex-col">
+                         <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-full flex flex-col">
+                            <h3 className="text-lg font-bold text-slate-800 mb-4">Equipment Types</h3>
+                            <div className="flex-1 flex items-center justify-center min-h-[300px]">
+                                <DistributionChart data={stats.type_distribution} />
+                            </div>
+                         </div>
                     </div>
-                    <div className="lg:col-span-2">
-                        <TrendChart data={records} title="Live Process Trends (Flow & Pressure)" />
+
+                    {/* Bottom Row */}
+                    <div className="lg:col-span-2 flex flex-col">
+                         <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-full">
+                             {/* Trend Chart has its own title logic usually, but let's wrap it for consistency if needed, 
+                                 or just let it be. TrendChart usually has title inside. 
+                                 Let's keep it consistent: Remove title from component if possible or just wrap it. 
+                                 The TrendChart component renders its own card? Let's check view_code_item but I recall it rendering the card.
+                                 Wait, TrendChart usually renders the whole card. 
+                                 Let's check code context. TrendChart takes `data` and `title`. 
+                                 If I wrap it in a div with bg-white, I might double wrap it. 
+                                 Let's assume TrendChart renders the card.
+                                 Actually, looking at previous helper calls or standard practices here, 
+                                 I'll assume I need to pass className or style to TrendChart to make it h-full?
+                                 Or just wrap it.
+                                 
+                                 Actually, looking at previous code:
+                                 <TrendChart data={records} title="..." />
+                                 If TrendChart has fixed height or styles, it might not grow.
+                                 
+                                 Let's look at TrendChart source briefly if I could, but I can't in this tool.
+                                 However, I can just wrap it and ensure it fills.
+                              */}
+                            <TrendChart data={records} title="Live Process Trends (Flow & Pressure)" />
+                         </div>
                     </div>
-                    <div className="relative">
-                        <div className="absolute top-6 right-6 z-10 flex gap-2">
-                             <select 
-                                value={scatterX} 
-                                onChange={(e) => setScatterX(e.target.value)}
-                                className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-1 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer w-20"
-                            >
-                                <option value="flowrate">Flow</option>
-                                <option value="pressure">Press</option>
-                                <option value="temperature">Temp</option>
-                            </select>
-                             <select 
-                                value={scatterY} 
-                                onChange={(e) => setScatterY(e.target.value)}
-                                className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-1 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer w-20"
-                            >
-                                <option value="flowrate">Flow</option>
-                                <option value="pressure">Press</option>
-                                <option value="temperature">Temp</option>
-                            </select>
+
+                    <div className="relative flex flex-col">
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-full">
+                            <div className="flex justify-between items-center mb-4 gap-2">
+                                <h3 className="text-lg font-bold text-slate-800 truncate" title={`${scatterX} vs ${scatterY}`}>
+                                    {scatterX.charAt(0).toUpperCase() + scatterX.slice(1)} vs {scatterY.charAt(0).toUpperCase() + scatterY.slice(1)}
+                                </h3>
+                                <div className="flex gap-2 flex-shrink-0">
+                                     <select 
+                                        value={scatterX} 
+                                        onChange={(e) => setScatterX(e.target.value)}
+                                        className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-1 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer w-20"
+                                    >
+                                        <option value="flowrate">Flow</option>
+                                        <option value="pressure">Press</option>
+                                        <option value="temperature">Temp</option>
+                                    </select>
+                                     <select 
+                                        value={scatterY} 
+                                        onChange={(e) => setScatterY(e.target.value)}
+                                        className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-1 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer w-20"
+                                    >
+                                        <option value="flowrate">Flow</option>
+                                        <option value="pressure">Press</option>
+                                        <option value="temperature">Temp</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="flex-1 min-h-[300px]">
+                                <CorrelationChart 
+                                    data={records} 
+                                    title="" // Title handled by parent
+                                    xKey={scatterX} yKey={scatterY}
+                                    xLabel={scatterX.charAt(0).toUpperCase() + scatterX.slice(1)} 
+                                    yLabel={scatterY.charAt(0).toUpperCase() + scatterY.slice(1)}
+                                />
+                            </div>
                         </div>
-                        <CorrelationChart 
-                            data={records} 
-                            title={`${scatterX.charAt(0).toUpperCase() + scatterX.slice(1)} vs ${scatterY.charAt(0).toUpperCase() + scatterY.slice(1)}`}
-                            xKey={scatterX} yKey={scatterY}
-                            xLabel={scatterX.charAt(0).toUpperCase() + scatterX.slice(1)} 
-                            yLabel={scatterY.charAt(0).toUpperCase() + scatterY.slice(1)}
-                        />
                     </div>
                 </div>
             )}
