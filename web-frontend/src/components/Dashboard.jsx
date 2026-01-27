@@ -61,13 +61,13 @@ export default function Dashboard({ onSelect }) {
                                     type="file"
                                     accept=".csv"
                                     onChange={(e) => setFile(e.target.files[0])}
-                                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
                                 />
                             </div>
                             <button
                                 type="submit"
                                 disabled={!file || uploading}
-                                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none disabled:bg-gray-400"
+                                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none disabled:bg-gray-400"
                             >
                                 {uploading ? 'Uploading...' : 'Upload'}
                             </button>
@@ -81,13 +81,13 @@ export default function Dashboard({ onSelect }) {
                     <nav className="-mb-px flex" aria-label="Tabs">
                          <button
                             onClick={() => setActiveTab('my')}
-                            className={`${activeTab === 'my' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm`}
+                            className={`${activeTab === 'my' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm`}
                         >
                             My History
                         </button>
                         <button
                             onClick={() => setActiveTab('global')}
-                            className={`${activeTab === 'global' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm`}
+                            className={`${activeTab === 'global' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm`}
                         >
                             Global History
                         </button>
@@ -100,7 +100,7 @@ export default function Dashboard({ onSelect }) {
                             <a href="#" onClick={(e) => { e.preventDefault(); onSelect(ds.id); }} className="block hover:bg-gray-50">
                                 <div className="px-4 py-4 sm:px-6">
                                     <div className="flex items-center justify-between">
-                                        <p className="text-sm font-medium text-indigo-600 truncate">
+                                        <p className="text-sm font-medium text-primary-600 truncate">
                                             Dataset #{ds.id} {ds.user ? `(User: ${ds.user})` : ''}
                                         </p>
                                         <div className="ml-2 flex-shrink-0 flex">

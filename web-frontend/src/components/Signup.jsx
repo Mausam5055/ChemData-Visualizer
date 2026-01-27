@@ -34,7 +34,7 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
                 <div className="max-w-md w-full mx-auto">
                     {/* Logo Area */}
                     <div className="flex items-center gap-2 mb-8">
-                        <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold">C</div>
+                        <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center text-white font-bold">C</div>
                         <span className="text-xl font-bold text-gray-900 tracking-tight">ChemViz</span>
                     </div>
 
@@ -47,7 +47,7 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
                             <input 
                                 type="text" 
                                 required 
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none transition-all"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-600 focus:border-transparent outline-none transition-all"
                                 placeholder="Choose a username" 
                                 value={username} 
                                 onChange={(e) => setUsername(e.target.value)} 
@@ -58,7 +58,7 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
                             <input 
                                 type="email" 
                                 required 
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none transition-all"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-600 focus:border-transparent outline-none transition-all"
                                 placeholder="you@example.com" 
                                 value={email} 
                                 onChange={(e) => setEmail(e.target.value)} 
@@ -69,7 +69,7 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
                             <input 
                                 type="password" 
                                 required 
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none transition-all"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-600 focus:border-transparent outline-none transition-all"
                                 placeholder="Create a password" 
                                 value={password} 
                                 onChange={(e) => setPassword(e.target.value)} 
@@ -80,7 +80,7 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
                             <input 
                                 type="password" 
                                 required 
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none transition-all"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-600 focus:border-transparent outline-none transition-all"
                                 placeholder="Confirm your password" 
                                 value={confirmPassword} 
                                 onChange={(e) => setConfirmPassword(e.target.value)} 
@@ -91,7 +91,7 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
 
                         <button 
                             type="submit" 
-                            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 mt-4"
+                            className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 mt-4"
                         >
                             Sign Up
                         </button>
@@ -99,7 +99,7 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
 
                     <p className="mt-8 text-center text-sm text-gray-600">
                         Already have an account?{' '}
-                        <button onClick={onSwitchToLogin} className="font-bold text-indigo-600 hover:text-indigo-500">
+                        <button onClick={onSwitchToLogin} className="font-bold text-primary-600 hover:text-primary-500">
                             Sign In
                         </button>
                     </p>
@@ -110,12 +110,12 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
             <div className="hidden md:flex md:w-1/2 bg-gray-50 relative overflow-hidden items-center justify-center p-12">
                 
                 {/* Decorative blobs */}
-                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-indigo-100 blur-3xl opacity-50"></div>
-                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-blue-100 blur-3xl opacity-50"></div>
+                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-primary-100 blur-3xl opacity-50"></div>
+                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-primary-100 blur-3xl opacity-50"></div>
                 
                 <div className="relative w-full max-w-lg">
                     <div className="mb-6">
-                        <span className="text-indigo-600 font-semibold tracking-wide uppercase text-xs">Analytics Dashboard</span>
+                        <span className="text-primary-600 font-semibold tracking-wide uppercase text-xs">Analytics Dashboard</span>
                         <h2 className="text-3xl font-bold text-gray-900 mt-2">Monitor Chemical Parameters<br/>in Real-Time</h2>
                         <p className="text-gray-500 mt-2">Track flowrates, pressure, and temperature with advanced visualization.</p>
                     </div>
@@ -140,11 +140,11 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
 
                         {/* Fake Chart Area */}
                         <div className="h-40 bg-gray-50 rounded-xl relative overflow-hidden flex items-end justify-between px-2 pb-0 opacity-80">
-                            <div className="w-1/6 bg-indigo-200 h-[40%] rounded-t-sm mx-1"></div>
-                            <div className="w-1/6 bg-indigo-300 h-[70%] rounded-t-sm mx-1"></div>
-                            <div className="w-1/6 bg-indigo-500 h-[50%] rounded-t-sm mx-1"></div>
-                            <div className="w-1/6 bg-indigo-600 h-[85%] rounded-t-sm mx-1"></div>
-                            <div className="w-1/6 bg-indigo-400 h-[60%] rounded-t-sm mx-1"></div>
+                            <div className="w-1/6 bg-primary-200 h-[40%] rounded-t-sm mx-1"></div>
+                            <div className="w-1/6 bg-primary-300 h-[70%] rounded-t-sm mx-1"></div>
+                            <div className="w-1/6 bg-primary-500 h-[50%] rounded-t-sm mx-1"></div>
+                            <div className="w-1/6 bg-primary-600 h-[85%] rounded-t-sm mx-1"></div>
+                            <div className="w-1/6 bg-primary-400 h-[60%] rounded-t-sm mx-1"></div>
                         </div>
                     </div>
                 </div>

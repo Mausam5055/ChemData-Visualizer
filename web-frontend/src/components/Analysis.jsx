@@ -28,7 +28,7 @@ ChartJS.register(
 
 // SVGs for cards
 const FlowIcon = () => (
-    <svg className="h-6 w-6 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg className="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
     </svg>
 );
@@ -82,7 +82,7 @@ export default function Analysis({ datasetId }) {
 
     if (loading) return (
         <div className="flex justify-center items-center h-64">
-             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
         </div>
     );
     if (!stats) return <div className="text-center text-red-500 mt-10">Error loading data.</div>;
@@ -93,11 +93,11 @@ export default function Analysis({ datasetId }) {
             {
                 label: 'Count',
                 data: Object.values(stats.type_distribution),
-                backgroundColor: 'rgba(99, 102, 241, 0.7)',
-                borderColor: 'rgba(99, 102, 241, 1)',
+                backgroundColor: 'rgba(13, 148, 136, 0.7)',
+                borderColor: 'rgba(13, 148, 136, 1)',
                 borderWidth: 0,
                 borderRadius: 6,
-                hoverBackgroundColor: 'rgba(79, 70, 229, 0.9)',
+                hoverBackgroundColor: 'rgba(15, 118, 110, 0.9)',
             },
         ],
     };
@@ -175,7 +175,7 @@ export default function Analysis({ datasetId }) {
                         <dd className="mt-2 text-3xl font-extrabold text-gray-900">{stats.average_flowrate?.toFixed(1)}</dd>
                         <span className="text-xs font-medium text-gray-400 mt-2 inline-block">Liters/min</span>
                     </div>
-                     <div className="p-3 bg-indigo-50 rounded-xl">
+                     <div className="p-3 bg-primary-50 rounded-xl">
                         <FlowIcon />
                     </div>
                 </div>
@@ -228,9 +228,9 @@ export default function Analysis({ datasetId }) {
                                 {Math.max(...records.map(r => r.temperature)).toFixed(1)} °C
                             </span>
                         </div>
-                         <div className="p-4 bg-indigo-50 rounded-lg mt-4">
-                            <p className="text-sm text-indigo-800 font-medium">System Status</p>
-                            <p className="text-xs text-indigo-600 mt-1">All parameters within optimal range based on recent upload.</p>
+                         <div className="p-4 bg-primary-50 rounded-lg mt-4">
+                            <p className="text-sm text-primary-800 font-medium">System Status</p>
+                            <p className="text-xs text-primary-600 mt-1">All parameters within optimal range based on recent upload.</p>
                         </div>
                     </div>
                 </div>
@@ -258,7 +258,7 @@ export default function Analysis({ datasetId }) {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{record.equipment_name}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                            ${record.equipment_type === 'Pump' ? 'bg-blue-100 text-blue-800' : 
+                                            ${record.equipment_type === 'Pump' ? 'bg-sky-100 text-sky-800' : 
                                               record.equipment_type === 'Valve' ? 'bg-green-100 text-green-800' : 
                                               'bg-gray-100 text-gray-800'}`}>
                                             {record.equipment_type}

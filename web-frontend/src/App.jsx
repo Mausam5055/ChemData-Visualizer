@@ -59,7 +59,7 @@ function App() {
                     <nav className="max-w-4xl mx-auto bg-white/90 backdrop-blur-md shadow-xl rounded-full px-8 py-3 ring-1 ring-gray-200">
                         <div className="flex justify-between items-center h-10">
                             <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold shadow-sm">C</div>
+                                <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center text-white font-bold shadow-sm">C</div>
                                 <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">ChemViz</h1>
                             </div>
                             <div className="flex items-center gap-4">
