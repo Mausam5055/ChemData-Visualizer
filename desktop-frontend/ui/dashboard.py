@@ -55,8 +55,16 @@ class MainWindow(QMainWindow):
         self.list_datasets.itemClicked.connect(self.load_dataset)
         sidebar_layout.addWidget(self.list_datasets)
         
-        # Upload Button
+        # Load Sample Data Button (now first)
+        self.btn_sample = QPushButton("Load Sample Data")
+        self.btn_sample.setObjectName("secondary")
+        self.btn_sample.setCursor(Qt.PointingHandCursor)
+        self.btn_sample.clicked.connect(self.load_sample_dataset)
+        sidebar_layout.addWidget(self.btn_sample)
+        
+        # Upload Button (now second)
         self.btn_upload = QPushButton("Upload New CSV")
+        self.btn_upload.setStyleSheet("background-color: #0d9488; color: white; font-weight: bold;")
         self.btn_upload.setCursor(Qt.PointingHandCursor)
         self.btn_upload.clicked.connect(self.upload_csv)
         sidebar_layout.addWidget(self.btn_upload)
@@ -188,6 +196,45 @@ class MainWindow(QMainWindow):
                     QMessageBox.warning(self, "Upload Failed", resp.text)
             except Exception as e:
                 QMessageBox.critical(self, "Error", str(e))
+    
+    def load_sample_dataset(self):
+        """Upload the sample dataset and automatically load it"""
+        import os
+        
+        # Find sample_equipment_data.csv in project root
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        sample_path = os.path.join(project_root, "sample_equipment_data.csv")
+        
+        if not os.path.exists(sample_path):
+            QMessageBox.warning(self, "File Not Found", 
+                              f"Sample dataset not found at:\n{sample_path}\n\nPlease ensure sample_equipment_data.csv exists in the project root.")
+            return
+        
+        try:
+            files = {'file': open(sample_path, 'rb')}
+            resp = requests.post(API_URL + "upload/", headers=self.headers, files=files)
+            
+            if resp.status_code == 201:
+                # Refresh dataset list
+                self.refresh_datasets()
+                
+                # Auto-select the newly uploaded dataset
+                # Get the new dataset ID from response
+                new_dataset_id = resp.json().get('id')
+                if new_dataset_id:
+                    # Find and select the item in the list
+                    for i in range(self.list_datasets.count()):
+                        item = self.list_datasets.item(i)
+                        if item.data(Qt.UserRole) == new_dataset_id:
+                            self.list_datasets.setCurrentItem(item)
+                            self.load_dataset(item)
+                            break
+                
+                QMessageBox.information(self, "Success", "Sample dataset loaded successfully!")
+            else:
+                QMessageBox.warning(self, "Upload Failed", resp.text)
+        except Exception as e:
+            QMessageBox.critical(self, "Error", str(e))
 
     def load_dataset(self, item):
         dataset_id = str(item.data(Qt.UserRole))
