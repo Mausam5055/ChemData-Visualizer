@@ -40,34 +40,34 @@ export default function TrendChart({ data, title = "Process Trends" }) {
         gradient.addColorStop(0, 'rgba(13, 148, 136, 0.5)'); // Teal 600
         gradient.addColorStop(1, 'rgba(13, 148, 136, 0.0)');
 
-        setChartData({
-            labels: data.map((_, i) => i + 1),
-            datasets: [
-                {
-                    label: 'Flowrate (L/min)',
-                    data: data.map(r => r.flowrate),
-                    borderColor: '#0d9488', // Teal-600
-                    backgroundColor: gradient,
-                    fill: true,
-                    tension: 0.4,
+        const metricConfigs = {
+            flowrate: { label: 'Flowrate (L/min)', color: '#0d9488', bg: gradient, fill: true, axis: 'y' },
+            pressure: { label: 'Pressure (PSI)', color: '#f59e0b', bg: 'transparent', fill: false, axis: 'y1' },
+            temperature: { label: 'Temperature (°C)', color: '#f43f5e', bg: 'transparent', fill: false, axis: 'y' }
+        };
+
+        const datasets = (data && data[0]) ? Object.keys(metricConfigs)
+            .filter(key => data[0].hasOwnProperty(key)) // Only metrics present in data
+            .map(key => {
+                 const config = metricConfigs[key];
+                 return {
+                    label: config.label,
+                    data: data.map(r => r[key]),
+                    borderColor: config.color,
+                    backgroundColor: config.bg,
+                    fill: config.fill,
                     borderWidth: 2,
-                    pointRadius: 0, // Hide points by default
-                    pointHoverRadius: 6,
-                    yAxisID: 'y',
-                },
-                {
-                    label: 'Pressure (PSI)',
-                    data: data.map(r => r.pressure),
-                    borderColor: '#f59e0b', // Amber-500
-                    backgroundColor: 'transparent',
-                    borderWidth: 2,
-                    borderDash: [5, 5],
-                    tension: 0.4,
+                    tension: key === 'flowrate' ? 0.4 : 0.3,
                     pointRadius: 0,
                     pointHoverRadius: 6,
-                    yAxisID: 'y1',
-                }
-            ]
+                    yAxisID: config.axis,
+                    hidden: false // could toggle visibility based on props later if needed
+                 };
+            }) : [];
+
+        setChartData({
+            labels: data.map((_, i) => i + 1),
+            datasets: datasets
         });
 
     }, [data]);

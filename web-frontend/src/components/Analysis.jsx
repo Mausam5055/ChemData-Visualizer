@@ -54,6 +54,12 @@ export default function Analysis({ datasetId }) {
     const [records, setRecords] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const [viewMode, setViewMode] = useState('overview'); // overview, trends, equipment, correlations
+
+    const [barMetric, setBarMetric] = useState('flowrate');
+    const [scatterX, setScatterX] = useState('pressure');
+    const [scatterY, setScatterY] = useState('temperature');
+
     useEffect(() => {
         setLoading(true);
         const minLoadTime = new Promise(resolve => setTimeout(resolve, 800)); // Minimum 800ms skeleton
@@ -72,14 +78,14 @@ export default function Analysis({ datasetId }) {
         });
     }, [datasetId]);
 
-    const getBarData = () => {
+    const getBarData = (metric = 'flowrate') => {
         if (!records || records.length === 0) return {};
         const sums = {};
         const counts = {};
         records.forEach(r => {
             const t = r.equipment_type;
             if (!sums[t]) { sums[t] = 0; counts[t] = 0; }
-            sums[t] += r.flowrate;
+            sums[t] += r[metric];
             counts[t] += 1;
         });
         const avgs = {};
@@ -158,13 +164,29 @@ export default function Analysis({ datasetId }) {
                     </div>
                     <p className="text-slate-500 mt-1 text-sm">Real-time performance metrics and equipment status.</p>
                  </div>
-                 <button onClick={downloadPDF} className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all font-medium text-sm">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    Export Report (PDF)
-                 </button>
+                 
+                 <div className="flex gap-3">
+                     {/* View Switcher */}
+                     <div className="bg-slate-100 p-1 rounded-xl flex items-center">
+                        {['overview', 'trends', 'equipment', 'correlations'].map((v) => (
+                            <button 
+                                key={v}
+                                onClick={() => setViewMode(v)}
+                                className={`px-4 py-2 rounded-lg text-sm font-semibold capitalize transition-all ${viewMode === v ? 'bg-white text-primary-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                            >
+                                {v}
+                            </button>
+                        ))}
+                     </div>
+
+                    <button onClick={downloadPDF} className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all font-medium text-sm">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Export
+                    </button>
+                 </div>
             </div>
 
-            {/* KPI Cards */}
+            {/* KPI Cards - Always Visible */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatCard 
                     title="Total Records" 
@@ -200,26 +222,108 @@ export default function Analysis({ datasetId }) {
                 />
             </div>
 
-            {/* Charts Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Row 1 */}
-                <div className="lg:col-span-2">
-                    <TrendChart data={records} title="Live Process Trends (Flow & Pressure)" />
+            {/* Overview Mode */}
+            {viewMode === 'overview' && (
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="lg:col-span-2 relative">
+                        <div className="absolute top-6 right-6 z-10">
+                            <select 
+                                value={barMetric} 
+                                onChange={(e) => setBarMetric(e.target.value)}
+                                className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-1 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer"
+                            >
+                                <option value="flowrate">Flowrate</option>
+                                <option value="pressure">Pressure</option>
+                                <option value="temperature">Temperature</option>
+                            </select>
+                        </div>
+                        <BarChart 
+                            data={getBarData(barMetric)} 
+                            title={`Average ${barMetric.charAt(0).toUpperCase() + barMetric.slice(1)} by Equipment`} 
+                        />
+                    </div>
+                    <div>
+                        <DistributionChart data={stats.type_distribution} />
+                    </div>
+                    <div className="lg:col-span-2">
+                        <TrendChart data={records} title="Live Process Trends (Flow & Pressure)" />
+                    </div>
+                    <div className="relative">
+                        <div className="absolute top-6 right-6 z-10 flex gap-2">
+                             <select 
+                                value={scatterX} 
+                                onChange={(e) => setScatterX(e.target.value)}
+                                className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-1 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer w-20"
+                            >
+                                <option value="flowrate">Flow</option>
+                                <option value="pressure">Press</option>
+                                <option value="temperature">Temp</option>
+                            </select>
+                             <select 
+                                value={scatterY} 
+                                onChange={(e) => setScatterY(e.target.value)}
+                                className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-1 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer w-20"
+                            >
+                                <option value="flowrate">Flow</option>
+                                <option value="pressure">Press</option>
+                                <option value="temperature">Temp</option>
+                            </select>
+                        </div>
+                        <CorrelationChart 
+                            data={records} 
+                            title={`${scatterX.charAt(0).toUpperCase() + scatterX.slice(1)} vs ${scatterY.charAt(0).toUpperCase() + scatterY.slice(1)}`}
+                            xKey={scatterX} yKey={scatterY}
+                            xLabel={scatterX.charAt(0).toUpperCase() + scatterX.slice(1)} 
+                            yLabel={scatterY.charAt(0).toUpperCase() + scatterY.slice(1)}
+                        />
+                    </div>
                 </div>
-                <div>
+            )}
+
+            {/* Trends Mode */}
+            {viewMode === 'trends' && (
+                <div className="space-y-6">
+                    <TrendChart data={records} title="Flowrate Trend" />
+                    <TrendChart data={records} title="Pressure Trend" />
+                    <TrendChart data={records} title="Temperature Trend" />
+                </div>
+            )}
+
+             {/* Equipment Mode */}
+             {viewMode === 'equipment' && (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                     <BarChart data={getBarData('flowrate')} title="Avg Flowrate by Equipment" />
+                     <BarChart data={getBarData('pressure')} title="Avg Pressure by Equipment" />
+                     <BarChart data={getBarData('temperature')} title="Avg Temperature by Equipment" />
                      <DistributionChart data={stats.type_distribution} />
                 </div>
+            )}
 
-                {/* Row 2 */}
-                <div className="lg:col-span-2">
-                     <BarChart data={getBarData()} title="Average Flowrate by Equipment Type" />
+            {/* Correlations Mode */}
+            {viewMode === 'correlations' && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <CorrelationChart 
+                        data={records} 
+                        title="Pressure vs Temperature"
+                        xKey="pressure" yKey="temperature"
+                        xLabel="Pressure (PSI)" yLabel="Temperature (°C)"
+                    />
+                     <CorrelationChart 
+                        data={records} 
+                        title="Flow vs Pressure"
+                        xKey="flowrate" yKey="pressure"
+                        xLabel="Flowrate (L/min)" yLabel="Pressure (PSI)"
+                    />
+                     <CorrelationChart 
+                        data={records} 
+                        title="Flow vs Temperature"
+                        xKey="flowrate" yKey="temperature"
+                        xLabel="Flowrate (L/min)" yLabel="Temperature (°C)"
+                    />
                 </div>
-                <div>
-                    <CorrelationChart data={records} />
-                </div>
-            </div>
+            )}
 
-            {/* Data Table */}
+            {/* Data Table - Always Visible */}
             <div className="bg-white shadow-sm border border-slate-100 rounded-2xl overflow-hidden mt-6">
                 <div className="px-8 py-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                     <h3 className="text-lg font-bold text-slate-900">equipment_log_2026.csv</h3>

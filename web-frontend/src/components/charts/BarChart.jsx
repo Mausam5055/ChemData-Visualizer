@@ -25,10 +25,10 @@ export default function BarChart({ data, title = "Avg Flowrate by Type" }) {
         labels: Object.keys(data),
         datasets: [
             {
-                label: 'Avg Flowrate (L/min)',
+                label: title.includes("Pressure") ? "Pressure (PSI)" : title.includes("Temp") ? "Temperature (°C)" : 'Avg Flowrate (L/min)',
                 data: Object.values(data),
-                backgroundColor: 'rgba(13, 148, 136, 0.8)', // Teal-600
-                hoverBackgroundColor: 'rgba(15, 118, 110, 1)', // Teal-700
+                backgroundColor: title.includes("Pressure") ? 'rgba(245, 158, 11, 0.8)' : title.includes("Temp") ? 'rgba(244, 63, 94, 0.8)' : 'rgba(13, 148, 136, 0.8)',
+                hoverBackgroundColor: title.includes("Pressure") ? 'rgba(245, 158, 11, 1)' : title.includes("Temp") ? 'rgba(244, 63, 94, 1)' : 'rgba(15, 118, 110, 1)',
                 borderRadius: 4,
                 barThickness: 30,
             },

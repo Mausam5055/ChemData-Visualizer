@@ -10,13 +10,13 @@ import {
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-export default function CorrelationChart({ data, title = "Pressure vs Temp" }) {
+export default function CorrelationChart({ data, title = "Pressure vs Temp", xKey='pressure', yKey='temperature', xLabel='Pressure (PSI)', yLabel='Temperature (°C)' }) {
 
     const chartData = {
         datasets: [
             {
                 label: 'Readings',
-                data: data.map(r => ({ x: r.pressure, y: r.temperature })),
+                data: data.map(r => ({ x: r[xKey], y: r[yKey] })),
                 backgroundColor: 'rgba(13, 148, 136, 0.4)', // Teal with higher transparency
                 borderColor: 'rgba(13, 148, 136, 0.8)',
                 borderWidth: 1,
@@ -40,7 +40,7 @@ export default function CorrelationChart({ data, title = "Pressure vs Temp" }) {
                 borderWidth: 1,
                 padding: 10,
                 callbacks: {
-                    label: (context) => `P: ${context.raw.x} PSI, T: ${context.raw.y} °C`
+                    label: (context) => `${xLabel.split(' ')[0]}: ${context.raw.x}, ${yLabel.split(' ')[0]}: ${context.raw.y}`
                 }
             }
         },
@@ -48,13 +48,13 @@ export default function CorrelationChart({ data, title = "Pressure vs Temp" }) {
             x: {
                 type: 'linear',
                 position: 'bottom',
-                title: { display: true, text: 'Pressure (PSI)', color: '#94a3b8', font: { size: 10 } },
+                title: { display: true, text: xLabel, color: '#94a3b8', font: { size: 10 } },
                 grid: { color: '#f1f5f9' },
                 ticks: { color: '#64748b', font: { size: 10 } },
                 border: { display: false }
             },
             y: {
-                title: { display: true, text: 'Temperature (°C)', color: '#94a3b8', font: { size: 10 } },
+                title: { display: true, text: yLabel, color: '#94a3b8', font: { size: 10 } },
                 grid: { color: '#f1f5f9' },
                 ticks: { color: '#64748b', font: { size: 10 } },
                 border: { display: false }
