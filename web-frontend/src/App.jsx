@@ -5,6 +5,8 @@ import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
 import Analysis from './components/Analysis'
 import Sidebar from './components/Sidebar'
+import Features from './components/Features'
+import Support from './components/Support'
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -91,6 +93,10 @@ function App() {
 
                         {view === 'analysis' && selectedDatasetId ? (
                             <Analysis datasetId={selectedDatasetId} />
+                        ) : view === 'features' ? (
+                            <Features />
+                        ) : view === 'support' ? (
+                            <Support />
                         ) : (
                             <Dashboard onSelect={handleSelectDataset} />
                         )}
