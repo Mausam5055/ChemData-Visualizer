@@ -1,0 +1,9 @@
+django>=5.0
+djangorestframework
+django-cors-headers
+pandas
+reportlab
+django-allauth
+dj-rest-auth
+python-dotenv
+matplotlib

@@ -18,6 +18,19 @@ export default {
           950: '#042f2e',
         },
       },
+      keyframes: {
+        'spin-reverse': {
+          to: { transform: 'rotate(-360deg)' },
+        },
+        'progress-indeterminate': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        }
+      },
+      animation: {
+        'spin-reverse': 'spin-reverse 3s linear infinite',
+        'progress-indeterminate': 'progress-indeterminate 2s infinite linear',
+      },
     },
   },
   plugins: [],

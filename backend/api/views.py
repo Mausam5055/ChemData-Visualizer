@@ -90,90 +90,158 @@ class DatasetStatsView(APIView):
             "type_distribution": dist_dict
         })
 
+from reportlab.lib.utils import ImageReader
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 class DatasetPDFView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request, id):
         buffer = io.BytesIO()
         p = canvas.Canvas(buffer)
-        
+        width, height = 595.27, 841.89 # A4 Size
+
+        # --- Colors ---
+        TEAL_DARK = (0.05, 0.58, 0.53) # #0d9488
+        TEAL_LIGHT = (0.94, 0.99, 0.98) # #f0fdfa
+        GRAY_TEXT = (0.2, 0.2, 0.2)
+        GRAY_LINE = (0.8, 0.8, 0.8)
+
         # --- HEADER ---
-        p.setFont("Helvetica-Bold", 18)
-        p.setFillColorRGB(0.2, 0.2, 0.6) # Indigo-ish
-        p.drawString(50, 800, "ChemData Visualizer Report")
+        p.setFillColorRGB(*TEAL_DARK)
+        p.rect(0, height - 100, width, 100, fill=1, stroke=0)
         
+        p.setFont("Helvetica-Bold", 24)
+        p.setFillColorRGB(1, 1, 1)
+        p.drawString(40, height - 55, "ChemViz Analytical Report")
+        
+        from datetime import datetime
         p.setFont("Helvetica", 10)
-        p.setFillColorRGB(0.5, 0.5, 0.5)
-        p.drawString(50, 785, f"Dataset Report ID: {id}")
-        p.line(50, 775, 550, 775)
+        p.setFillColorRGB(0.9, 0.9, 0.9)
+        p.drawString(40, height - 75, f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M')} | Dataset ID: {id}")
         
-        # --- SUMMARY SECTION ---
+        # --- SUMMARY STATISTICS ---
         records = EquipmentRecord.objects.filter(dataset_id=id)
         total = records.count()
-
-        if total == 0:
-            p.drawString(50, 750, "No data available in this dataset.")
-        else:
+        
+        if total > 0:
             avg_flow = records.aggregate(Avg('flowrate'))['flowrate__avg']
             avg_press = records.aggregate(Avg('pressure'))['pressure__avg']
             avg_temp = records.aggregate(Avg('temperature'))['temperature__avg']
             
-            p.setFont("Helvetica-Bold", 12)
-            p.setFillColorRGB(0, 0, 0)
-            p.drawString(50, 750, "Summary Metrics")
+            y_pos = height - 150
             
-            p.setFont("Helvetica", 10)
-            p.drawString(50, 730, f"Total Individual Records: {total}")
+            p.setFont("Helvetica-Bold", 14)
+            p.setFillColorRGB(*GRAY_TEXT)
+            p.drawString(40, y_pos, "Executive Summary")
             
-            # Simple Metrics Box
-            p.rect(50, 680, 500, 40, stroke=1, fill=0)
-            p.line(216, 680, 216, 720)
-            p.line(382, 680, 382, 720)
+            # Stat Cards
+            card_y = y_pos - 60
+            card_width = 110
+            card_height = 50
+            gap = 20
             
-            p.setFont("Helvetica-Bold", 10)
-            p.drawCentredString(133, 705, "Avg Flowrate")
-            p.drawCentredString(299, 705, "Avg Pressure")
-            p.drawCentredString(465, 705, "Avg Temp")
+            def draw_stat_box(x, title, value, unit):
+                p.setStrokeColorRGB(*GRAY_LINE)
+                p.setFillColorRGB(1, 1, 1)
+                p.roundRect(x, card_y, card_width, card_height, 5, fill=1, stroke=1)
+                p.setFont("Helvetica", 9)
+                p.setFillColorRGB(0.5, 0.5, 0.5)
+                p.drawString(x + 10, card_y + 32, title)
+                p.setFont("Helvetica-Bold", 14)
+                p.setFillColorRGB(*TEAL_DARK)
+                p.drawString(x + 10, card_y + 12, f"{value}")
+                p.setFont("Helvetica", 8)
+                p.setFillColorRGB(0.6, 0.6, 0.6)
+                p.drawRightString(x + card_width - 10, card_y + 14, unit)
+
+            draw_stat_box(40, "Total Records", str(total), "")
+            draw_stat_box(40 + card_width + gap, "Avg Flowrate", f"{avg_flow:.1f}", "L/min")
+            draw_stat_box(40 + 2*(card_width + gap), "Avg Pressure", f"{avg_press:.1f}", "PSI")
+            draw_stat_box(40 + 3*(card_width + gap), "Avg Temp", f"{avg_temp:.1f}", "°C")
+
+            # --- GRAPHS SECTION ---
+            # Prepare Data
+            df = pd.DataFrame(list(records.values('flowrate', 'pressure', 'equipment_type')))
             
-            p.setFont("Helvetica", 10)
-            p.drawCentredString(133, 690, f"{avg_flow:.2f}")
-            p.drawCentredString(299, 690, f"{avg_press:.2f}")
-            p.drawCentredString(465, 690, f"{avg_temp:.2f}")
+            graph_y = card_y - 220 
+            
+            # 1. Trend Plot
+            plt.figure(figsize=(6, 3))
+            plt.plot(df.index, df['flowrate'], label='Flowrate', color='#0d9488', linewidth=1)
+            plt.plot(df.index, df['pressure'], label='Pressure', color='#f59e0b', linestyle='--', linewidth=1)
+            plt.title('Process Trends', fontsize=10)
+            plt.legend(fontsize=8)
+            plt.grid(True, linestyle=':', alpha=0.6)
+            plt.tight_layout()
+            
+            img_buffer = io.BytesIO()
+            plt.savefig(img_buffer, format='png', dpi=100)
+            img_buffer.seek(0)
+            p.drawImage(ImageReader(img_buffer), 40, graph_y, width=300, height=180)
+            plt.close()
+
+            # 2. Distribution Plot
+            plt.figure(figsize=(4, 3))
+            counts = df['equipment_type'].value_counts()
+            colors = ['#0f766e', '#0d9488', '#14b8a6', '#2dd4bf', '#5eead4']
+            plt.pie(counts, labels=counts.index, autopct='%1.1f%%', colors=colors[:len(counts)], textprops={'fontsize': 8})
+            plt.title('Equipment Distribution', fontsize=10)
+            plt.tight_layout()
+            
+            img_buffer2 = io.BytesIO()
+            plt.savefig(img_buffer2, format='png', dpi=100)
+            img_buffer2.seek(0)
+            p.drawImage(ImageReader(img_buffer2), 360, graph_y, width=200, height=180)
+            plt.close()
 
             # --- DATA TABLE ---
-            y = 640
-            p.setFont("Helvetica-Bold", 10)
-            p.setFillColorRGB(0.2, 0.2, 0.2)
+            y = graph_y - 40
+            p.setFont("Helvetica-Bold", 14)
+            p.setFillColorRGB(*GRAY_TEXT)
+            p.drawString(40, y, "Detailed Equipment Log")
             
-            # Table Headers
+            y -= 30
+            
+            # Table Header
+            p.setFillColorRGB(*TEAL_DARK)
+            p.rect(40, y - 5, 515, 20, fill=1, stroke=0)
+            p.setFont("Helvetica-Bold", 9)
+            p.setFillColorRGB(1, 1, 1)
             p.drawString(50, y, "Equipment Name")
-            p.drawString(200, y, "Type")
-            p.drawString(300, y, "Flowrate")
-            p.drawString(400, y, "Pressure")
+            p.drawString(220, y, "Type")
+            p.drawString(320, y, "Flowrate")
+            p.drawString(410, y, "Pressure")
             p.drawString(500, y, "Temp")
             
-            p.setStrokeColorRGB(0.8, 0.8, 0.8)
-            p.line(50, y-5, 550, y-5)
             y -= 25
-            
             p.setFont("Helvetica", 9)
+            p.setFillColorRGB(*GRAY_TEXT)
             
-            for record in records:
+            for index, record in enumerate(records):
                 if y < 50:
                     p.showPage()
-                    y = 800
+                    y = height - 50
                 
-                p.drawString(50, y, str(record.equipment_name)[:20])
-                p.drawString(200, y, str(record.equipment_type))
-                p.drawString(300, y, f"{record.flowrate:.2f}")
-                p.drawString(400, y, f"{record.pressure:.2f}")
-                p.drawString(500, y, f"{record.temperature:.2f}")
+                if index % 2 == 1:
+                    p.setFillColorRGB(*TEAL_LIGHT)
+                    p.rect(40, y - 5, 515, 15, fill=1, stroke=0)
+                    p.setFillColorRGB(*GRAY_TEXT)
+
+                p.drawString(50, y, str(record.equipment_name)[:25])
+                p.drawString(220, y, str(record.equipment_type))
+                p.drawString(320, y, f"{record.flowrate:.1f}")
+                p.drawString(410, y, f"{record.pressure:.1f}")
+                p.drawString(500, y, f"{record.temperature:.1f}")
                 
-                # Zebra striping (optional, keeping clean white for print)
-                p.line(50, y-5, 550, y-5)
-                y -= 20
+                y -= 18
+
+        else:
+            p.setFont("Helvetica", 12)
+            p.drawString(40, height - 150, "No data records found in this dataset.")
 
         p.showPage()
         p.save()
-        
         buffer.seek(0)
         return HttpResponse(buffer, content_type='application/pdf')

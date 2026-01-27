@@ -4,82 +4,98 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
 import Analysis from './components/Analysis'
+import Sidebar from './components/Sidebar'
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [view, setView] = useState('dashboard'); // 'dashboard', 'analysis', 'login', 'signup'
   const [selectedDatasetId, setSelectedDatasetId] = useState(null);
 
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
   useEffect(() => {
     if (!token) {
         if (view !== 'signup') setView('login');
     } else {
-        if (view === 'login' || view === 'signup') setView('dashboard');
+        // Default to dashboard/overview if logged in and view is auth related or undefined
+        if (view === 'login' || view === 'signup' || !view) setView('overview');
     }
-  }, [token, view]);
+  }, [token]);
 
   const handleLogin = (newToken) => {
     localStorage.setItem('token', newToken);
     setToken(newToken);
-    setView('dashboard');
+    setView('overview');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     setToken(null);
     setView('login');
+    setSelectedDatasetId(null);
   };
 
   const handleSelectDataset = (id) => {
     setSelectedDatasetId(id);
     setView('analysis');
+    // On mobile, close sidebar on selection
+    if (window.innerWidth < 1024) setSidebarOpen(false);
   };
 
-  const handleBack = () => {
-    setSelectedDatasetId(null);
-    setView('dashboard');
-  };
-  
-  const content = () => {
-      if (!token) {
-          if (view === 'signup') return <Signup onLogin={handleLogin} onSwitchToLogin={() => setView('login')} />;
-          return <Login onLogin={handleLogin} onSwitchToSignup={() => setView('signup')} />;
-      }
-      if (view === 'analysis' && selectedDatasetId) return <Analysis datasetId={selectedDatasetId} />;
-      return <Dashboard onSelect={handleSelectDataset} />;
+  const handleViewChange = (newView) => {
+      setView(newView);
+      if (newView === 'overview') setSelectedDatasetId(null);
+      if (window.innerWidth < 1024) setSidebarOpen(false);
   }
+
+  // Temporary function to simulate upload click for now, can be properly implemented later
+  const handleUploadClick = () => {
+      // For now, switch to overview where we might put the upload button or open a modal
+      setView('overview');
+      // If we had a modal, we would open it here. 
+      // Current Dashboard has upload, so ensure we are in a mode that shows it.
+  };
 
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         {!token ? (
-            content()
+            view === 'signup' ? 
+                <Signup onLogin={handleLogin} onSwitchToLogin={() => setView('login')} /> : 
+                <Login onLogin={handleLogin} onSwitchToSignup={() => setView('signup')} />
         ) : (
-            <div className="min-h-screen bg-gray-100">
-                <div className="pt-6 pb-2 px-4 sticky top-0 z-50">
-                    <nav className="max-w-4xl mx-auto bg-white/90 backdrop-blur-md shadow-xl rounded-full px-8 py-3 ring-1 ring-gray-200">
-                        <div className="flex justify-between items-center h-10">
+            <div className="flex h-screen bg-slate-50 overflow-hidden">
+                <Sidebar 
+                    isOpen={isSidebarOpen} 
+                    toggle={() => setSidebarOpen(!isSidebarOpen)}
+                    onLogout={handleLogout}
+                    onViewChange={handleViewChange}
+                    currentView={view}
+                    selectedDatasetId={selectedDatasetId}
+                    onSelectDataset={handleSelectDataset}
+                    onUploadClick={handleUploadClick}
+                />
+
+                <div className="flex-1 flex flex-col min-w-0 overflow-hidden lg:pl-72 transition-all duration-300">
+                    {/* Data Content */}
+                    <main className="flex-1 overflow-y-auto p-4 sm:p-8 custom-scrollbar">
+                        {/* Mobile Header Toggle */}
+                        <div className="lg:hidden flex items-center justify-between mb-6">
                             <div className="flex items-center gap-2">
                                 <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center text-white font-bold shadow-sm">C</div>
-                                <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">ChemViz</h1>
+                                <span className="text-xl font-bold text-slate-900">ChemViz</span>
                             </div>
-                            <div className="flex items-center gap-4">
-                                {view === 'analysis' && (
-                                    <button onClick={handleBack} className="text-gray-500 hover:text-gray-900 text-sm font-medium transition-colors flex items-center gap-1">
-                                        ← Dashboard
-                                    </button>
-                                )}
-                                <div className="h-4 w-px bg-gray-300 mx-2"></div>
-                                <button onClick={handleLogout} className="text-red-600 hover:text-red-700 text-sm font-medium bg-red-50 hover:bg-red-100 px-4 py-1.5 rounded-full transition-all">
-                                    Logout
-                                </button>
-                            </div>
+                            <button onClick={() => setSidebarOpen(true)} className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+                            </button>
                         </div>
-                    </nav>
-                </div>
 
-                <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                    {content()}
-                </main>
+                        {view === 'analysis' && selectedDatasetId ? (
+                            <Analysis datasetId={selectedDatasetId} />
+                        ) : (
+                            <Dashboard onSelect={handleSelectDataset} />
+                        )}
+                    </main>
+                </div>
             </div>
         )}
     </GoogleOAuthProvider>

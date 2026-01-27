@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../api';
+import ProcessingOverlay from './ui/ProcessingOverlay';
+import Skeleton from './ui/Skeleton';
 
 export default function Dashboard({ onSelect }) {
     const [datasets, setDatasets] = useState([]);
@@ -30,10 +32,14 @@ export default function Dashboard({ onSelect }) {
 
         setUploading(true);
         try {
-             // Uploading always goes to user's history
-            await api.post('api/upload/', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
+            // Uploading always goes to user's history
+            await Promise.all([
+                api.post('api/upload/', formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                }),
+                new Promise(resolve => setTimeout(resolve, 2500)) // Artificial delay for UX
+            ]);
+            
             setFile(null);
             if (activeTab === 'my') fetchDatasets();
             else setActiveTab('my'); // switch to see new upload
@@ -46,6 +52,8 @@ export default function Dashboard({ onSelect }) {
 
     return (
         <div className="space-y-6">
+            <ProcessingOverlay isProcessing={uploading} message="Uploading & Analyzing Dataset..." />
+            
             <div className="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                     <div className="md:col-span-1">
@@ -67,9 +75,9 @@ export default function Dashboard({ onSelect }) {
                             <button
                                 type="submit"
                                 disabled={!file || uploading}
-                                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none disabled:bg-gray-400"
+                                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
                             >
-                                {uploading ? 'Uploading...' : 'Upload'}
+                                {uploading ? 'Processing...' : 'Upload'}
                             </button>
                         </form>
                     </div>
@@ -95,33 +103,42 @@ export default function Dashboard({ onSelect }) {
                 </div>
                 
                 <ul className="divide-y divide-gray-200">
-                    {datasets.map((ds) => (
-                        <li key={ds.id}>
-                            <a href="#" onClick={(e) => { e.preventDefault(); onSelect(ds.id); }} className="block hover:bg-gray-50">
-                                <div className="px-4 py-4 sm:px-6">
-                                    <div className="flex items-center justify-between">
-                                        <p className="text-sm font-medium text-primary-600 truncate">
-                                            Dataset #{ds.id} {ds.user ? `(User: ${ds.user})` : ''}
-                                        </p>
-                                        <div className="ml-2 flex-shrink-0 flex">
-                                            <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                {new Date(ds.uploaded_at).toLocaleString()}
+                    {datasets.length === 0 && datasets !== null ? ( // Assuming null could be loading state if initialized that way, currently []
+                         // If we wanted a skeleton for the list, we could use it here. 
+                         // But for now, let's just make sure list looks good.
+                         // Actually let's use skeleton if datasets is empty and we are fetching? 
+                         // But we don't have a loading state for fetchDatasets separate from uploading.
+                         // Let's add a local loading state for that.
+                         <li className="px-4 py-4 sm:px-6 text-center text-gray-500">No datasets found.</li>
+                    ) : (
+                        datasets.map((ds) => (
+                            <li key={ds.id}>
+                                <a href="#" onClick={(e) => { e.preventDefault(); onSelect(ds.id); }} className="block hover:bg-gray-50 transition-colors">
+                                    <div className="px-4 py-4 sm:px-6">
+                                        <div className="flex items-center justify-between">
+                                            <p className="text-sm font-medium text-primary-600 truncate">
+                                                Dataset #{ds.id} {ds.user ? `(User: ${ds.user})` : ''}
                                             </p>
+                                            <div className="ml-2 flex-shrink-0 flex">
+                                                <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                    {new Date(ds.uploaded_at).toLocaleString()}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="mt-2 sm:flex sm:justify-between">
+                                            <div className="sm:flex">
+                                                <p className="flex items-center text-sm text-gray-500">
+                                                    <svg className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                    </svg>
+                                                    {ds.file.split('/').pop()}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="mt-2 sm:flex sm:justify-between">
-                                        <div className="sm:flex">
-                                            <p className="flex items-center text-sm text-gray-500">
-                                                {ds.file.split('/').pop()}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    ))}
-                    {datasets.length === 0 && (
-                        <li className="px-4 py-4 sm:px-6 text-center text-gray-500">No datasets found.</li>
+                                </a>
+                            </li>
+                        ))
                     )}
                 </ul>
             </div>
