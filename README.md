@@ -47,6 +47,32 @@ graph TD
     Desktop <--> Auth
 ```
 
+### 🔄 Data Flow Pipeline
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Client as Web/Desktop App
+    participant API as Django API
+    participant DB as Database
+    participant Parse as Pandas Parser
+
+    User->>Client: Upload CSV File
+    Client->>API: POST /api/upload/
+    API->>Media: Save File
+    API->>Parse: Read & Process CSV
+    Parse->>DB: Bulk Create EquipmentRecords
+    DB-->>API: Success
+    API-->>Client: 201 Created
+
+    User->>Client: Select Dataset
+    Client->>API: GET /api/datasets/{id}/stats/
+    API->>DB: Aggregation Queries (Avg/Count)
+    DB-->>API: Statistical Data
+    API-->>Client: JSON Response
+    Client->>User: Render Charts & KPIs
+```
+
 ---
 
 ## 🚀 Key Features

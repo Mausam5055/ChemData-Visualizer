@@ -19,6 +19,32 @@ The **Desktop Frontend** is a native Windows application providing powerful loca
 
 ---
 
+## 🧠 Application Logic Flow
+
+```mermaid
+graph LR
+    subgraph "Main Window"
+        Sidebar[Sidebar List] -- Clicked --> Loader[load_dataset()]
+        Loader -- Switch Page --> Stack{QStackedWidget}
+
+        Stack -->|Page 0| Empty[Empty State]
+        Stack -->|Page 1| Dashboard[Analysis View]
+    end
+
+    subgraph "Data Processing"
+        Loader -- Request --> API[Django API]
+        API -- JSON --> Parser[Pandas DataFrame]
+        Parser -- Render --> Matplotlib[Figures & Canvas]
+        Parser -- Populate --> Table[QTableWidget]
+    end
+
+    Dashboard --> Controls{Dropdowns}
+    Controls -- Signal --> UpdateChart[update_scatter/bar()]
+    UpdateChart -- Redraw --> Matplotlib
+```
+
+---
+
 ## 📂 Project Structure
 
 The monolithic `main.py` has been refactored into a modular architecture for better maintainability.

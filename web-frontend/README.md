@@ -20,6 +20,32 @@ The **Web Frontend** provides a modern, responsive dashboard for users to intera
 
 ---
 
+## 🏗️ Component Architecture
+
+```mermaid
+graph TD
+    App[App.jsx] --> Router{React Router}
+    Router -->|/login| Auth[Login/Signup]
+    Router -->|/| Layout[Main Layout]
+
+    Layout --> Sidebar[Navigation Bar]
+    Layout --> Content[Page Content]
+
+    Content -->|Dashboard| Analysis[Analysis.jsx]
+
+    subgraph "Dashboard Widgets"
+        Analysis --> KPI[StatCard Components]
+        Analysis --> Bar[BarChart.jsx]
+        Analysis --> Trend[TrendChart.jsx]
+        Analysis --> Dist[DistributionChart.jsx]
+        Analysis --> Scatter[CorrelationChart.jsx]
+    end
+
+    Analysis -->|API Calls| Axios[api.js]
+```
+
+---
+
 ## 📂 Project Structure
 
 ```bash
