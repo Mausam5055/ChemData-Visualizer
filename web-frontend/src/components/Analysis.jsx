@@ -210,12 +210,12 @@ export default function Analysis({ datasetId }) {
                  
                  <div className="flex gap-3">
                      {/* View Switcher */}
-                     <div className="bg-slate-100 p-1 rounded-xl flex items-center">
+                     <div className="bg-slate-100 p-1 rounded-xl flex items-center overflow-x-auto max-w-[calc(100vw-4rem)] sm:max-w-none custom-scrollbar">
                         {['overview', 'trends', 'equipment', 'correlations'].map((v) => (
                             <button 
                                 key={v}
                                 onClick={() => setViewMode(v)}
-                                className={`px-4 py-2 rounded-lg text-sm font-semibold capitalize transition-all ${viewMode === v ? 'bg-white text-primary-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                className={`px-4 py-2 rounded-lg text-sm font-semibold capitalize transition-all whitespace-nowrap ${viewMode === v ? 'bg-white text-primary-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                             >
                                 {v}
                             </button>

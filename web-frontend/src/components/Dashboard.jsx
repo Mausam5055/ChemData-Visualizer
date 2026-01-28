@@ -261,19 +261,19 @@ export default function Dashboard({ onSelect }) {
                                     onClick={() => onSelect(ds.id)}
                                     className="p-4 hover:bg-slate-50 transition-colors cursor-pointer group flex items-center justify-between"
                                 >
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center border border-teal-100 group-hover:scale-110 transition-transform">
+                                    <div className="flex items-center gap-4 min-w-0 flex-1">
+                                        <div className="w-10 h-10 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center border border-teal-100 group-hover:scale-110 transition-transform flex-shrink-0">
                                             <span className="font-bold text-sm">csv</span>
                                         </div>
-                                        <div>
-                                            <h4 className="text-sm font-bold text-slate-800 group-hover:text-primary-600 transition-colors">
+                                        <div className="min-w-0 flex-1 pr-2">
+                                            <h4 className="text-sm font-bold text-slate-800 group-hover:text-primary-600 transition-colors truncate">
                                                 {ds.file.split('/').pop()}
                                                 {ds.user && <span className="ml-2 font-normal text-xs text-slate-400">by {ds.user}</span>}
                                             </h4>
-                                            <p className="text-xs text-slate-500 mt-0.5 flex items-center gap-2">
-                                                <span>{ds.file.split('/').pop()}</span>
-                                                <span className="w-1 h-1 rounded-full bg-slate-300"></span>
-                                                <span>{new Date(ds.uploaded_at).toLocaleDateString()} at {new Date(ds.uploaded_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                                            <p className="text-xs text-slate-500 mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1">
+                                                <span className="truncate max-w-[150px] sm:max-w-xs">{ds.file.split('/').pop()}</span>
+                                                <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-slate-300"></span>
+                                                <span className="whitespace-nowrap">{new Date(ds.uploaded_at).toLocaleDateString()} at {new Date(ds.uploaded_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
                                             </p>
                                         </div>
                                     </div>
