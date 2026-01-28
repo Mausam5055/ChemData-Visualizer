@@ -210,7 +210,7 @@ export default function Analysis({ datasetId }) {
                  
                  <div className="flex flex-col sm:flex-row gap-3 w-full xl:w-auto">
                      {/* View Switcher */}
-                     <div className="bg-slate-100 p-1 rounded-xl flex items-center overflow-x-auto w-full sm:w-auto custom-scrollbar">
+                     <div className="bg-slate-100 p-1 rounded-xl flex items-center overflow-x-auto w-full sm:w-auto no-scrollbar">
                         {['overview', 'trends', 'equipment', 'correlations'].map((v) => (
                             <button 
                                 key={v}

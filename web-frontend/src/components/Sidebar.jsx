@@ -42,13 +42,7 @@ export default function Sidebar({ isOpen, toggle, onLogout, onViewChange, curren
                     <div className="flex-1 overflow-y-auto py-6 px-4 space-y-1 custom-scrollbar">
                         <h3 className="px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Main</h3>
                         
-                        <button 
-                            onClick={() => onViewChange('overview')}
-                            className={`w-full flex items-center px-4 py-3 rounded-xl transition-colors font-medium text-sm ${currentView === 'overview' ? 'bg-primary-50 text-primary-700' : 'text-slate-600 hover:bg-slate-50'}`}
-                        >
-                            <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
-                            Global Overview
-                        </button>
+
 
                         <button 
                             onClick={onUploadClick}

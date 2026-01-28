@@ -103,7 +103,7 @@ export default function Features() {
             </div>
 
             {/* CTA Section */}
-            <div className="py-20 bg-yellow-400 text-center relative overflow-hidden">
+            <div className="py-20 bg-yellow-400 text-center relative overflow-hidden rounded-[2.5rem] mx-4 md:mx-6 mb-6">
                 <div className="relative z-10 max-w-2xl mx-auto px-6">
                     <h2 className="text-3xl font-bold text-slate-900 mb-6">Ready to optimize your workflow?</h2>
                     <p className="text-slate-800 font-medium mb-8">Join hundreds of chemical engineers using ChemViz to drive production efficiency.</p>
