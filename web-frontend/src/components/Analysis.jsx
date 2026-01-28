@@ -424,7 +424,7 @@ export default function Analysis({ datasetId }) {
                         {records.length} Records
                     </span>
                 </div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto no-scrollbar">
                     <table className="min-w-full divide-y divide-slate-100">
                         <thead className="bg-slate-50">
                             <tr>

@@ -184,7 +184,7 @@ export default function Support() {
                             <div className="mt-6 pt-6 border-t border-slate-100 text-center">
                                 <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Or call us directly at</p>
                                 <div className="text-2xl font-mono font-bold text-slate-800 tracking-wider">
-                                    +1 (555) 123-4567
+                                  +91 8638545574
                                 </div>
                             </div>
                         </div>
