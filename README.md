@@ -28,6 +28,8 @@
 
 ## 🏗️ System Architecture
 
+### 🏛️ Standard Deployment
+
 ```mermaid
 graph TD
     subgraph "Client Layer"
@@ -54,7 +56,37 @@ graph TD
     Desktop <--> Auth
 ```
 
-> **Note**: The entire stack can be containerized and deployed using **Docker**. See the [Getting Started](#-getting-started) section for details.
+### 🐳 Dockerized Deployment
+
+```mermaid
+graph TD
+    subgraph "Dockerized Environment"
+        subgraph "Client Layer"
+            Web[💻 React Web App]
+            Desktop[🖥️ PyQt Desktop App]
+        end
+
+        subgraph "API Layer"
+            LB["Nginx / Gunicorn"]
+            Django["Django REST Framework"]
+            Auth["🔐 Auth Service (JWT/OAuth)"]
+        end
+
+        subgraph "Data Layer"
+            DB[("PostgreSQL / SQLite")]
+            Media["📂 Media Storage (CSVs/PDFs)"]
+        end
+    end
+
+    Web -->|HTTP/JSON| Django
+    Desktop -->|HTTP/JSON| Django
+    Django -->|ORM| DB
+    Django -->|File I/O| Media
+    Web <--> Auth
+    Desktop <--> Auth
+```
+
+> **Note**: The entire stack can be containerized. See the [Getting Started](#-getting-started) section for details.
 
 ### 🔄 Data Flow Pipeline
 
