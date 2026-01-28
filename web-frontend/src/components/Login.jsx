@@ -74,6 +74,7 @@ export default function Login({ onLogin, onSwitchToSignup }) {
                         </button>
                     </form>
 
+{/* 
                     <div className="mt-6 flex flex-col gap-4">
                         <div className="relative">
                             <div className="absolute inset-0 flex items-center">
@@ -93,6 +94,7 @@ export default function Login({ onLogin, onSwitchToSignup }) {
                             />
                         </div>
                     </div>
+                    */}
 
                     <p className="mt-8 text-center text-sm text-gray-600">
                         Don't Have an Account?{' '}

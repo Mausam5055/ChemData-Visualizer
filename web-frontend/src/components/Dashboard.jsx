@@ -11,6 +11,18 @@ export default function Dashboard({ onSelect }) {
     const [activeTab, setActiveTab] = useState('my'); // 'my' or 'global'
     const [isDragging, setIsDragging] = useState(false);
 
+    const [user, setUser] = useState(null);
+    const [showProfile, setShowProfile] = useState(false);
+
+    const fetchUser = async () => {
+        try {
+            const res = await api.get('auth/user/');
+            setUser(res.data);
+        } catch (err) {
+            console.error("Failed to fetch user:", err);
+        }
+    };
+
     const fetchDatasets = async () => {
         setLoadingData(true);
         try {
@@ -26,6 +38,7 @@ export default function Dashboard({ onSelect }) {
 
     useEffect(() => {
         fetchDatasets();
+        fetchUser();
     }, [activeTab]);
 
     const handleDragOver = (e) => {
@@ -73,7 +86,7 @@ export default function Dashboard({ onSelect }) {
     };
 
     return (
-        <div className="space-y-8 max-w-[1200px] mx-auto pb-12">
+        <div className="space-y-8 max-w-[1200px] mx-auto pb-12 relative">
             <ProcessingOverlay isProcessing={uploading} message="Uploading & Analyzing Dataset..." />
             
             {/* Header */}
@@ -82,7 +95,48 @@ export default function Dashboard({ onSelect }) {
                      <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Welcome Back</h1>
                      <p className="text-slate-500 mt-1">Manage your chemical process datasets and generate insights.</p>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-3 items-center">
+                     {user && (
+                        <div className="relative">
+                            <button 
+                                onClick={() => setShowProfile(!showProfile)}
+                                className="flex items-center gap-2 px-3 py-2 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors shadow-sm"
+                            >
+                                <div className="w-6 h-6 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-xs font-bold">
+                                    {user.username.charAt(0).toUpperCase()}
+                                </div>
+                                <span className="text-sm font-medium text-slate-700 hidden sm:block">{user.username}</span>
+                                <svg className={`w-4 h-4 text-slate-400 transition-transform ${showProfile ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                            </button>
+
+                            {/* Profile Dropdown */}
+                            {showProfile && (
+                                <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 p-4 z-50">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className="w-12 h-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-lg font-bold">
+                                            {user.username.charAt(0).toUpperCase()}
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-bold text-slate-900">{user.username}</p>
+                                            <p className="text-xs text-slate-500 break-all">{user.email}</p>
+                                        </div>
+                                    </div>
+                                    <div className="border-t border-slate-50 pt-3">
+                                        <p className="text-xs text-slate-400 uppercase font-semibold mb-2">Account Details</p>
+                                        <div className="flex justify-between text-sm py-1">
+                                            <span className="text-slate-500">User ID</span>
+                                            <span className="font-mono text-slate-700">#{user.pk}</span>
+                                        </div>
+                                         <div className="flex justify-between text-sm py-1">
+                                            <span className="text-slate-500">Status</span>
+                                            <span className="text-emerald-600 font-medium bg-emerald-50 px-2 rounded-full text-xs">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                     )}
+
                      <button className="px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl font-medium text-sm hover:bg-slate-50 transition-colors shadow-sm">
                         Documentation
                      </button>
@@ -237,4 +291,5 @@ export default function Dashboard({ onSelect }) {
             </div>
         </div>
     );
+
 }

@@ -77,9 +77,9 @@ class MainWindow(QMainWindow):
 
         # Logout Link (Bottom)
         sidebar_layout.addStretch()
-        lbl_user = QLabel("Logged In")
-        lbl_user.setStyleSheet("color: #64748b; font-size: 12px; font-weight: 600;")
-        sidebar_layout.addWidget(lbl_user)
+        self.lbl_user = QLabel("Logged In")
+        self.lbl_user.setStyleSheet("color: #64748b; font-size: 12px; font-weight: 600;")
+        sidebar_layout.addWidget(self.lbl_user)
         
         main_layout.addWidget(sidebar)
         
@@ -95,6 +95,36 @@ class MainWindow(QMainWindow):
         self.lbl_page_title.setObjectName("Heading")
         header_layout.addWidget(self.lbl_page_title)
         
+        header_layout.addStretch()
+
+        # Profile Widget
+        self.profile_widget = QFrame()
+        self.profile_widget.setObjectName("ProfilePill")
+        self.profile_widget.setStyleSheet("""
+            #ProfilePill {
+                background-color: white;
+                border: 1px solid #e2e8f0;
+                border-radius: 20px;
+                padding: 4px;
+            }
+        """)
+        profile_layout = QHBoxLayout(self.profile_widget)
+        profile_layout.setContentsMargins(4, 4, 12, 4)
+        profile_layout.setSpacing(8)
+
+        self.avatar = QLabel("U")
+        self.avatar.setFixedSize(32, 32)
+        self.avatar.setAlignment(Qt.AlignCenter)
+        self.avatar.setStyleSheet("background-color: #ccfbf1; color: #0f766e; border-radius: 16px; font-weight: bold; border: none;")
+        
+        self.lbl_username_header = QLabel("Loading...")
+        self.lbl_username_header.setStyleSheet("font-weight: 600; color: #334155; border: none;")
+
+        profile_layout.addWidget(self.avatar)
+        profile_layout.addWidget(self.lbl_username_header)
+        
+        header_layout.addWidget(self.profile_widget)
+
         self.btn_pdf = QPushButton("Export Report")
         self.btn_pdf.setObjectName("secondary")
         self.btn_pdf.setFixedWidth(140)
@@ -172,6 +202,35 @@ class MainWindow(QMainWindow):
         self.current_dataset_id = None
         self.df = None # Store dataframe
         self.refresh_datasets()
+        self.fetch_user_details()
+
+    def fetch_user_details(self):
+        try:
+            # API_URL is .../api/ but we need .../auth/user/
+            # So we remove 'api/' from the end and append 'auth/user/'
+            base_url = API_URL.replace("api/", "")
+            auth_url = base_url + "auth/user/"
+            print(f"Fetching user details from: {auth_url}")
+            
+            resp = requests.get(auth_url, headers=self.headers)
+            print(f"User details response: {resp.status_code} - {resp.text}")
+            if resp.status_code == 200:
+                user_data = resp.json()
+                username = user_data.get('username', 'User')
+                email = user_data.get('email', '')
+                
+                # Update Sidebar
+                self.lbl_user.setText(f"👤 {username}\n{email}")
+                self.lbl_user.setStyleSheet("color: #0f172a; font-size: 12px; font-weight: 700;")
+                
+                # Update Header Pill
+                self.lbl_username_header.setText(username)
+                initial = username[0].upper() if username else "U"
+                self.avatar.setText(initial)
+                
+        except Exception as e:
+            print(f"Error fetching user details: {e}")
+
 
     def refresh_datasets(self):
         try:
