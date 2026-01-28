@@ -94,7 +94,7 @@ function App() {
                         {view === 'analysis' && selectedDatasetId ? (
                             <Analysis datasetId={selectedDatasetId} />
                         ) : view === 'features' ? (
-                            <Features />
+                            <Features onGetStarted={() => setView('overview')} />
                         ) : view === 'support' ? (
                             <Support />
                         ) : (

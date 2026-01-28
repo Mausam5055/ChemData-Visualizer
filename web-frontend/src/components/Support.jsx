@@ -130,49 +130,72 @@ export default function Support() {
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-4">
-                                    <div className="gap-4">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="space-y-1">
                                             <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Name</label>
-                                            <input 
-                                                required
-                                                type="text" 
-                                                className="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 focus:ring-primary-500 focus:border-primary-500"
-                                                value={formData.name}
-                                                onChange={e => setFormData({...formData, name: e.target.value})}
-                                            />
+                                            <div className="relative">
+                                                <input 
+                                                    required
+                                                    type="text" 
+                                                    className="w-full bg-slate-50 border-slate-200 rounded-xl pl-10 pr-4 py-3 focus:ring-primary-500 focus:border-primary-500 transition-colors placeholder:text-slate-300"
+                                                    placeholder="John Doe"
+                                                    value={formData.name}
+                                                    onChange={e => setFormData({...formData, name: e.target.value})}
+                                                />
+                                                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="space-y-1 mt-4">
+                                        <div className="space-y-1">
                                             <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Email</label>
-                                            <input 
-                                                required
-                                                type="email" 
-                                                className="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 focus:ring-primary-500 focus:border-primary-500"
-                                                value={formData.email}
-                                                onChange={e => setFormData({...formData, email: e.target.value})}
-                                            />
+                                            <div className="relative">
+                                                <input 
+                                                    required
+                                                    type="email" 
+                                                    className="w-full bg-slate-50 border-slate-200 rounded-xl pl-10 pr-4 py-3 focus:ring-primary-500 focus:border-primary-500 transition-colors placeholder:text-slate-300"
+                                                    placeholder="john@example.com"
+                                                    value={formData.email}
+                                                    onChange={e => setFormData({...formData, email: e.target.value})}
+                                                />
+                                                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="space-y-1">
                                         <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Topic</label>
-                                        <select 
-                                            className="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 focus:ring-primary-500 focus:border-primary-500"
-                                            value={formData.type}
-                                            onChange={e => setFormData({...formData, type: e.target.value})}
-                                        >
-                                            <option value="question">General Question</option>
-                                            <option value="bug">Report a Bug</option>
-                                            <option value="feature">Feature Request</option>
-                                        </select>
+                                        <div className="relative">
+                                            <select 
+                                                className="w-full bg-slate-50 border-slate-200 rounded-xl pl-10 pr-4 py-3 focus:ring-primary-500 focus:border-primary-500 appearance-none"
+                                                value={formData.type}
+                                                onChange={e => setFormData({...formData, type: e.target.value})}
+                                            >
+                                                <option value="question">General Question</option>
+                                                <option value="bug">Report a Bug</option>
+                                                <option value="feature">Feature Request</option>
+                                            </select>
+                                            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                            </div>
+                                            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="space-y-1">
                                         <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Message</label>
-                                        <textarea 
-                                            required
-                                            rows={3}
-                                            className="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 focus:ring-primary-500 focus:border-primary-500"
-                                            value={formData.message}
-                                            onChange={e => setFormData({...formData, message: e.target.value})}
-                                        ></textarea>
+                                        <div className="relative">
+                                            <textarea 
+                                                required
+                                                rows={3}
+                                                className="w-full bg-slate-50 border-slate-200 rounded-xl p-4 focus:ring-primary-500 focus:border-primary-500 transition-colors placeholder:text-slate-300"
+                                                placeholder="How can we help you?"
+                                                value={formData.message}
+                                                onChange={e => setFormData({...formData, message: e.target.value})}
+                                            ></textarea>
+                                        </div>
                                     </div>
                                     <button type="submit" className="w-full bg-primary-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-primary-500/30 hover:bg-primary-700 transition-all hover:scale-[1.02] mt-2">
                                         Submit Request
@@ -180,11 +203,24 @@ export default function Support() {
                                 </form>
                             )}
 
-                            {/* Direct Contact Inside Modal */}
-                            <div className="mt-6 pt-6 border-t border-slate-100 text-center">
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Or call us directly at</p>
-                                <div className="text-2xl font-mono font-bold text-slate-800 tracking-wider">
-                                  +91 8638545574
+                            <div className="mt-6 pt-6 border-t border-slate-100">
+                                <p className="text-center text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Connect with us</p>
+                                <div className="flex justify-center gap-4 mb-6">
+                                    <a href="https://mauam04.vercel.app" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-50 text-slate-500 rounded-xl hover:bg-slate-100 hover:text-primary-600 transition-colors">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
+                                    </a>
+                                    <a href="https://github.com/Mausam5055/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-50 text-slate-500 rounded-xl hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/mausam-kar-6388861a7/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-50 text-slate-500 rounded-xl hover:bg-slate-100 hover:text-blue-700 transition-colors">
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                    </a>
+                                </div>
+                                <div className="text-center">
+                                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Or call us directly at</p>
+                                    <div className="text-lg font-mono font-bold text-slate-700 tracking-wider">
+                                    +91 8638545574
+                                    </div>
                                 </div>
                             </div>
                         </div>

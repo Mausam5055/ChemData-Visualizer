@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Features() {
+export default function Features({ onGetStarted }) {
     return (
         <div className="min-h-screen bg-slate-50 overflow-x-hidden relative">
              {/* --- Hero Section --- */}
@@ -107,7 +107,10 @@ export default function Features() {
                 <div className="relative z-10 max-w-2xl mx-auto px-6">
                     <h2 className="text-3xl font-bold text-slate-900 mb-6">Ready to optimize your workflow?</h2>
                     <p className="text-slate-800 font-medium mb-8">Join hundreds of chemical engineers using ChemViz to drive production efficiency.</p>
-                    <button className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-10 rounded-full shadow-lg shadow-slate-900/20 transition-all hover:scale-105">
+                    <button 
+                        onClick={onGetStarted}
+                        className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-10 rounded-full shadow-lg shadow-slate-900/20 transition-all hover:scale-105"
+                    >
                         Get Started Now
                     </button>
                 </div>
