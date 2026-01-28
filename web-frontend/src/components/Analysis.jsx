@@ -197,32 +197,32 @@ export default function Analysis({ datasetId }) {
     return (
         <div className="space-y-6 max-w-[1600px] mx-auto pb-10">
             {/* Header */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100">
                  <div>
                     <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-0.5 rounded-full bg-primary-100 text-primary-700 text-xs font-bold uppercase tracking-wide">
+                        <span className="px-2.5 py-0.5 rounded-full bg-primary-100 text-primary-700 text-xs font-bold uppercase tracking-wide whitespace-nowrap">
                             Dataset #{datasetId}
                         </span>
-                        <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Analytical Overview</h2>
+                        <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight truncate">Analytical Overview</h2>
                     </div>
                     <p className="text-slate-500 mt-1 text-sm">Real-time performance metrics and equipment status.</p>
                  </div>
                  
-                 <div className="flex gap-3">
+                 <div className="flex flex-col sm:flex-row gap-3 w-full xl:w-auto">
                      {/* View Switcher */}
-                     <div className="bg-slate-100 p-1 rounded-xl flex items-center overflow-x-auto max-w-[calc(100vw-4rem)] sm:max-w-none custom-scrollbar">
+                     <div className="bg-slate-100 p-1 rounded-xl flex items-center overflow-x-auto w-full sm:w-auto custom-scrollbar">
                         {['overview', 'trends', 'equipment', 'correlations'].map((v) => (
                             <button 
                                 key={v}
                                 onClick={() => setViewMode(v)}
-                                className={`px-4 py-2 rounded-lg text-sm font-semibold capitalize transition-all whitespace-nowrap ${viewMode === v ? 'bg-white text-primary-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                className={`flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold capitalize transition-all whitespace-nowrap ${viewMode === v ? 'bg-white text-primary-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                             >
                                 {v}
                             </button>
                         ))}
                      </div>
 
-                    <button onClick={downloadPDF} className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all font-medium text-sm">
+                    <button onClick={downloadPDF} className="flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all font-medium text-sm w-full sm:w-auto whitespace-nowrap">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                         Export
                     </button>
