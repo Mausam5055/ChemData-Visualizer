@@ -7,3 +7,7 @@ django-allauth
 dj-rest-auth
 python-dotenv
 matplotlib
+requests
+PyJWT
+cryptography
+requests-oauthlib

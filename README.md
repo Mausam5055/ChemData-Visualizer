@@ -137,58 +137,110 @@ ChemData-Visualizer/
 
 ## ⚡ Getting Started
 
-### 1️⃣ Backend Setup (Django)
+You can run the application either using **Docker** (Recommended for ease) or **Manually** (for individual development).
+
+### Option 1: Run with Docker 🐳 (Recommended)
+
+This will start the Backend (Django) and Web Frontend (React) simultaneously.
+
+1.  **Prerequisites**: Install Docker Desktop.
+2.  **Run Command**:
+    ```bash
+    docker-compose up --build
+    ```
+3.  **Access**:
+    - **Web App**: [http://localhost:5173](http://localhost:5173)
+    - **API**: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+_Note: If the build fails due to network issues, try the Manual method below._
+
+---
+
+### Option 2: Run Manually (Local Development)
+
+Open **3 separate terminal windows** for the best experience.
+
+#### Terminal 1: Backend (Django)
 
 ```bash
 # Navigate to backend
 cd backend
 
-# Create virtual environment
+# 1. Create virtual environment (Run once)
 python -m venv venv
 
-# Activate environment (Windows)
+# 2. Activate environment
+# Windows:
 venv\Scripts\activate
+# Mac/Linux:
+# source venv/bin/activate
 
-# Install dependencies
-pip install django djangorestframework django-cors-headers dj-rest-auth django-allauth pandas reportlab
+# 3. Install dependencies
+pip install -r requirements.txt
 
-# Run Migrations
+# 4. Run Migrations (Initialize DB)
 python manage.py migrate
 
-# Start Server
+# 5. Start Server
 python manage.py runserver
 ```
 
-_Server will start at `http://127.0.0.1:8000/`_
-
-### 2️⃣ Web Frontend Setup (React)
+#### Terminal 2: Web Frontend (React)
 
 ```bash
 # Navigate to web-frontend
 cd web-frontend
 
-# Install node modules
+# 1. Install node modules
 npm install
 
-# Start Development Server
+# 2. Start Development Server
 npm run dev
 ```
 
-_App will start at `http://localhost:5173/`_
-
-### 3️⃣ Desktop App Setup (PyQt5)
+#### Terminal 3: Desktop App (PyQt5)
 
 ```bash
-# Ensure backend virtual env is active
-cd backend
-venv\Scripts\activate
+# Navigate to desktop-frontend
+cd desktop-frontend
 
-# Install Desktop dependencies
-pip install pyqt5 matplotlib requests
+# 1. Install dependencies
+pip install -r requirements.txt
 
-# Run Application
-python ../desktop-frontend/main.py
+# 2. Run Application
+python main.py
 ```
+
+---
+
+## 🗄️ Accessing the Database
+
+The project uses **SQLite** by default (`db.sqlite3` in the backend folder).
+
+### Method 1: Django Admin (Recommended)
+
+This provides a user-friendly interface to manage your data.
+
+1.  **Create a Superuser**:
+    _Make sure you are inside the `backend` directory._
+
+    ```bash
+    cd backend  # If you are in the project root
+    python manage.py createsuperuser
+    ```
+
+    _Follow the prompts to set a username and password._\_
+
+2.  **Access the Admin Panel**:
+    - Go to [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+    - Login with your credentials.
+
+### Method 2: Direct File Access
+
+You can view the raw `backend/db.sqlite3` file using:
+
+- **VS Code Extensions**: Search for "SQLite Viewer" by Florian Klampfer or "SQLite" by alexcvzz.
+- **Desktop Tools**: [DB Browser for SQLite](https://sqlitebrowser.org/).
 
 ---
 
