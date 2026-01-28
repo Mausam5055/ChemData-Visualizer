@@ -1,0 +1,16 @@
+Equipment Name,Type,Flowrate,Pressure,Temperature
+Reactor-R1,Reactor,250.3,18.5,95.2
+Pump-D4,Pump,135.7,16.3,68.5
+Valve-Z5,Valve,0,6.2,23.8
+Compressor-C1,Compressor,180.0,22.0,105.0
+Mixer-M2,Mixer,75.5,3.5,35.2
+Tank-T3,Tank,0,1.5,48.7
+HeatEx-H2,Exchanger,320.5,11.2,88.3
+Pipe-P202,Pipe,135.0,16.0,67.8
+Reactor-R2,Reactor,245.8,18.0,92.5
+Pump-E5,Pump,140.2,17.1,70.3
+Valve-W3,Valve,0,5.5,24.1
+Separator-S1,Separator,90.0,8.0,55.0
+Filter-F1,Filter,85.3,7.5,40.5
+Tank-T4,Tank,0,1.3,46.0
+Mixer-M3,Mixer,65.0,2.8,32.5
