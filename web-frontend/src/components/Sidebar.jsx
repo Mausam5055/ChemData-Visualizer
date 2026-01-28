@@ -34,7 +34,7 @@ export default function Sidebar({ isOpen, toggle, onLogout, onViewChange, curren
                 <div className="flex flex-col h-full">
                     {/* Brand */}
                     <div className="h-16 flex items-center px-8 border-b border-slate-100">
-                        <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center text-white font-bold shadow-sm mr-3">C</div>
+                        <img src="/favicon.png" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm mr-3 object-cover" />
                         <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600">ChemViz</span>
                     </div>
 

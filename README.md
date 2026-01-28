@@ -30,22 +30,20 @@
 
 ```mermaid
 graph TD
-    subgraph "Dockerized Environment"
-        subgraph "Client Layer"
-            Web[💻 React Web App]
-            Desktop[🖥️ PyQt Desktop App]
-        end
+    subgraph "Client Layer"
+        Web[💻 React Web App]
+        Desktop[🖥️ PyQt Desktop App]
+    end
 
-        subgraph "API Layer"
-            LB["Nginx / Gunicorn"]
-            Django["Django REST Framework"]
-            Auth["🔐 Auth Service (JWT/OAuth)"]
-        end
+    subgraph "API Layer"
+        LB["Load Balancer / Nginx"]
+        Django["Django REST Framework"]
+        Auth["🔐 Auth Service (JWT/OAuth)"]
+    end
 
-        subgraph "Data Layer"
-            DB[("PostgreSQL / SQLite")]
-            Media["📂 Media Storage (CSVs/PDFs)"]
-        end
+    subgraph "Data Layer"
+        DB[("SQLite / PostgreSQL")]
+        Media["📂 Media Storage (CSVs/PDFs)"]
     end
 
     Web -->|HTTP/JSON| Django
@@ -55,6 +53,8 @@ graph TD
     Web <--> Auth
     Desktop <--> Auth
 ```
+
+> **Note**: The entire stack can be containerized and deployed using **Docker**. See the [Getting Started](#-getting-started) section for details.
 
 ### 🔄 Data Flow Pipeline
 
