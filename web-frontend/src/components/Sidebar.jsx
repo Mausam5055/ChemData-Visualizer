@@ -90,7 +90,7 @@ export default function Sidebar({ isOpen, toggle, onLogout, onViewChange, curren
                                     >
                                         <span className={`w-2 h-2 rounded-full mr-3 ${selectedDatasetId == ds.id ? 'bg-primary-500' : 'bg-slate-300 group-hover:bg-slate-400'}`}></span>
                                         <div className="truncate">
-                                            Dataset #{ds.id}
+                                            {ds.file.split('/').pop()}
                                             <span className="block text-[10px] text-slate-400 font-normal">{new Date(ds.uploaded_at).toLocaleDateString()}</span>
                                         </div>
                                     </button>

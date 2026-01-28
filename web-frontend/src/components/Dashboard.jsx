@@ -137,12 +137,14 @@ export default function Dashboard({ onSelect }) {
                         </div>
                      )}
 
-                     <button className="px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl font-medium text-sm hover:bg-slate-50 transition-colors shadow-sm">
+                     <a 
+                        href="https://drive.google.com/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl font-medium text-sm hover:bg-slate-50 transition-colors shadow-sm"
+                     >
                         Documentation
-                     </button>
-                     <button className="px-4 py-2 bg-primary-600 text-white rounded-xl font-medium text-sm hover:bg-primary-700 transition-colors shadow-lg shadow-primary-200">
-                        New Project
-                     </button>
+                     </a>
                 </div>
             </div>
 
@@ -265,7 +267,7 @@ export default function Dashboard({ onSelect }) {
                                         </div>
                                         <div>
                                             <h4 className="text-sm font-bold text-slate-800 group-hover:text-primary-600 transition-colors">
-                                                Dataset #{ds.id}
+                                                {ds.file.split('/').pop()}
                                                 {ds.user && <span className="ml-2 font-normal text-xs text-slate-400">by {ds.user}</span>}
                                             </h4>
                                             <p className="text-xs text-slate-500 mt-0.5 flex items-center gap-2">

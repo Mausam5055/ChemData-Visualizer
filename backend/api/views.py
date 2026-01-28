@@ -383,4 +383,12 @@ class DatasetPDFView(APIView):
         p.showPage()
         p.save()
         buffer.seek(0)
-        return HttpResponse(buffer, content_type='application/pdf')
+        
+        # Get filename
+        dataset = Dataset.objects.get(id=id)
+        original_filename = dataset.file.name.split('/')[-1]
+        pdf_filename = original_filename.rsplit('.', 1)[0] + '_report.pdf'
+        
+        response = HttpResponse(buffer, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{pdf_filename}"'
+        return response

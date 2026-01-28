@@ -100,14 +100,57 @@ export default function Analysis({ datasetId }) {
             const response = await api.get(`api/datasets/${datasetId}/pdf/`, {
                 responseType: 'blob',
             });
+            
+            // Extract filename from header if available
+            let filename = `ChemViz_Report_${datasetId}.pdf`;
+            const disposition = response.headers['content-disposition'];
+            if (disposition && disposition.indexOf('attachment') !== -1) {
+                const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                const matches = filenameRegex.exec(disposition);
+                if (matches != null && matches[1]) { 
+                    filename = matches[1].replace(/['"]/g, '');
+                }
+            }
+
+            // Method 1: File System Access API (Chrome/Edge/Opera) - True "Save As"
+            if ('showSaveFilePicker' in window) {
+                try {
+                    const handle = await window.showSaveFilePicker({
+                        suggestedName: filename,
+                        types: [{
+                            description: 'PDF Document',
+                            accept: {'application/pdf': ['.pdf']},
+                        }],
+                    });
+                    const writable = await handle.createWritable();
+                    await writable.write(response.data);
+                    await writable.close();
+                    return; 
+                } catch (err) {
+                    if (err.name === 'AbortError') return; // User cancelled
+                    // Fallback to legacy method on error
+                    console.warn("File System Access API failed, falling back", err);
+                }
+            }
+
+            // Method 2: Legacy Fallback (Firefox/Safari) - Prompt for rename
+            // User requested explicit option to change name
+            const userFilename = prompt("Save PDF Report as:", filename);
+            if (userFilename === null) return; // User clicked Cancel
+            
+            const finalName = userFilename || filename;
+
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', `ChemViz_Report_${datasetId}.pdf`);
+            link.setAttribute('download', finalName);
             document.body.appendChild(link);
             link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
         } catch (error) {
            console.error("PDF Download failed", error);
+           alert("Failed to generate PDF. Please try again.");
         }
     };
 

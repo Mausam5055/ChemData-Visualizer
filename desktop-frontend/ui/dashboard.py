@@ -240,10 +240,11 @@ class MainWindow(QMainWindow):
                 data = resp.json()
                 results = data.get('results', data)
                 for ds in results:
-                    fname = ds['file'].split('/')[-1][:20]
+                    fname = ds['file'].split('/')[-1] # Full filename
                     item = QListWidgetItem(f"📄 {fname}")
                     item.setToolTip(f"Dataset #{ds['id']} - {ds['uploaded_at']}")
                     item.setData(Qt.UserRole, ds['id'])
+                    item.setData(Qt.UserRole + 1, fname) # Store filename for export
                     self.list_datasets.addItem(item)
         except Exception as e:
             print(e)
@@ -304,7 +305,15 @@ class MainWindow(QMainWindow):
     def load_dataset(self, item):
         dataset_id = str(item.data(Qt.UserRole))
         self.current_dataset_id = dataset_id
-        self.lbl_page_title.setText(f"Analysis: {item.text()}")
+        
+        # Retrieve filename stored in UserRole + 1
+        filename = item.data(Qt.UserRole + 1)
+        if not filename:
+             # Fallback if not stored (e.g. older items before this change if app not restarted)
+             filename = item.text().replace("📄 ", "")
+        self.current_dataset_filename = filename
+
+        self.lbl_page_title.setText(f"Analysis: {filename}")
         self.btn_pdf.setVisible(True)
         
         self.content_stack.setCurrentIndex(1)
@@ -585,7 +594,12 @@ class MainWindow(QMainWindow):
         try:
             resp = requests.get(f"{API_URL}datasets/{self.current_dataset_id}/pdf/", headers=self.headers)
             if resp.status_code == 200:
-                path, _ = QFileDialog.getSaveFileName(self, "Save Analysis Report", f"ChemViz_Report_{self.current_dataset_id}.pdf", "PDF Files (*.pdf)")
+                # Construct default filename: filename.csv -> filename_report.pdf
+                bg_filename = getattr(self, 'current_dataset_filename', f'dataset_{self.current_dataset_id}')
+                base_name = bg_filename.rsplit('.', 1)[0]
+                default_name = f"{base_name}_report.pdf"
+                
+                path, _ = QFileDialog.getSaveFileName(self, "Save Analysis Report", default_name, "PDF Files (*.pdf)")
                 if path:
                     with open(path, 'wb') as f:
                         f.write(resp.content)
