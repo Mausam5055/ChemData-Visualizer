@@ -44,19 +44,55 @@ The platform enables chemical engineers and operators to monitor equipment perfo
 
 <div align="center">
 
-### Web Dashboard
+### 🌐 Web Application Screenshots
 
-![Web Dashboard Preview](web-frontend/src/assets/web.png)
+Browse through our comprehensive web dashboard features:
 
-_Modern React interface with real-time analytics, interactive charts, and KPI cards_
+```carousel
+![Web App - Login Page](Preview-Images/Web-app/1.png)
+**Login Page** - Secure authentication with email/password and Google OAuth integration
+<!-- slide -->
+![Web App - Signup Page](Preview-Images/Web-app/2.png)
+**Signup Page** - User registration with form validation and modern UI
+<!-- slide -->
+![Web App - Dashboard Overview](Preview-Images/Web-app/3.png)
+**Dashboard Overview** - Real-time analytics, KPI cards, and interactive charts
+<!-- slide -->
+![Web App - Data Upload](Preview-Images/Web-app/4.png)
+**Data Upload** - Drag-and-drop CSV file upload interface
+<!-- slide -->
+![Web App - Analytics Charts](Preview-Images/Web-app/5.png)
+**Analytics Charts** - Interactive Chart.js visualizations with multiple chart types
+<!-- slide -->
+![Web App - Equipment Statistics](Preview-Images/Web-app/6.png)
+**Equipment Statistics** - Detailed metrics and distribution analysis
+<!-- slide -->
+![Web App - Dataset Management](Preview-Images/Web-app/7.png)
+**Dataset Management** - View and manage uploaded datasets
+<!-- slide -->
+![Web App - Trend Analysis](Preview-Images/Web-app/8.png)
+**Trend Analysis** - Line charts showing trends over time
+<!-- slide -->
+![Web App - Correlation Explorer](Preview-Images/Web-app/9.png)
+**Correlation Explorer** - Scatter plots for correlation analysis
+<!-- slide -->
+![Web App - Report Generation](Preview-Images/Web-app/10.png)
+**Report Generation** - Generate and download professional PDF reports
+<!-- slide -->
+![Web App - Data Table View](Preview-Images/Web-app/11.png)
+**Data Table View** - Tabular view of equipment records with sorting and filtering
+<!-- slide -->
+![Web App - Settings & Profile](Preview-Images/Web-app/12.png)
+**Settings & Profile** - User profile management and application settings
+```
 
 ---
 
-### Desktop Application
+### 🖥️ Desktop Application
 
-![Desktop App Preview](web-frontend/src/assets/dekstop.png)
+_Native PyQt5 application with Matplotlib charts, teal-slate theme, and local data analysis_
 
-_Native PyQt5 application with Matplotlib charts and teal-slate theme_
+> 💡 **Desktop application screenshots coming soon!**
 
 </div>
 
