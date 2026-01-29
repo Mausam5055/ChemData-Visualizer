@@ -92,7 +92,19 @@ Browse through our comprehensive web dashboard features:
 
 _Native PyQt5 application with Matplotlib charts, teal-slate theme, and local data analysis_
 
-> 💡 **Desktop application screenshots coming soon!**
+```carousel
+![Desktop App - Login](Preview-Images/Dekstop-app/1.png)
+**Login Screen** - Desktop authentication interface with modern styling
+<!-- slide -->
+![Desktop App - Dashboard](Preview-Images/Dekstop-app/2.png)
+**Analytics Dashboard** - Main dashboard with Matplotlib charts and data visualization
+<!-- slide -->
+![Desktop App - Signup](Preview-Images/Dekstop-app/3.png)
+**Signup Screen** - User registration interface for desktop application
+<!-- slide -->
+![Desktop App - Data View](Preview-Images/Dekstop-app/4.png)
+**Data Table View** - Tabbed interface showing equipment records and logs
+```
 
 </div>
 
