@@ -62,7 +62,6 @@ The platform enables chemical engineers and operators to monitor equipment perfo
 |                                        |                                        |
 | -------------------------------------- | -------------------------------------- |
 | ![1](Preview-Images/Dekstop-app/1.png) | ![2](Preview-Images/Dekstop-app/2.png) |
-| ![3](Preview-Images/Dekstop-app/3.png) | ![4](Preview-Images/Dekstop-app/4.png) |
 
 ---
 
