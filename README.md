@@ -46,79 +46,48 @@ The platform enables chemical engineers and operators to monitor equipment perfo
 
 ### 🌐 Web Application Screenshots
 
-Browse through our comprehensive web dashboard features:
-
 #### 🔐 Authentication
 
-| Login Page                                                             | Signup Page                                          |
-| ---------------------------------------------------------------------- | ---------------------------------------------------- |
-| ![Login Page](Preview-Images/Web-app/1.png)                            | ![Signup Page](Preview-Images/Web-app/2.png)         |
-| Secure authentication with email/password and Google OAuth integration | User registration with form validation and modern UI |
+![Login](Preview-Images/Web-app/1.png)
+![Signup](Preview-Images/Web-app/2.png)
 
 #### 📊 Dashboard & Analytics
 
-![Dashboard Overview](Preview-Images/Web-app/3.png)
-_Real-time analytics, KPI cards, and interactive charts_
-
-![Analytics Charts](Preview-Images/Web-app/5.png)
-_Interactive Chart.js visualizations with multiple chart types_
-
-![Equipment Statistics](Preview-Images/Web-app/6.png)
-_Detailed metrics and distribution analysis_
+![Dashboard](Preview-Images/Web-app/3.png)
+![Analytics](Preview-Images/Web-app/5.png)
+![Statistics](Preview-Images/Web-app/6.png)
 
 #### 📂 Data Management
 
-| Data Upload                                  | Dataset Management                                  |
-| -------------------------------------------- | --------------------------------------------------- |
-| ![Data Upload](Preview-Images/Web-app/4.png) | ![Dataset Management](Preview-Images/Web-app/7.png) |
-| Drag-and-drop CSV file upload interface      | View and manage uploaded datasets                   |
+![Upload](Preview-Images/Web-app/4.png)
+![Datasets](Preview-Images/Web-app/7.png)
 
 #### 📈 Data Analysis
 
-![Trend Analysis](Preview-Images/Web-app/8.png)
-_Line charts showing trends over time_
-
-![Correlation Explorer](Preview-Images/Web-app/9.png)
-_Scatter plots for correlation analysis_
-
-![Data Table View](Preview-Images/Web-app/11.png)
-_Tabular view of equipment records with sorting and filtering_
+![Trends](Preview-Images/Web-app/8.png)
+![Correlation](Preview-Images/Web-app/9.png)
+![Table](Preview-Images/Web-app/11.png)
 
 #### 📄 Reports & Settings
 
-| Report Generation                                   | Settings & Profile                                   |
-| --------------------------------------------------- | ---------------------------------------------------- |
-| ![Report Generation](Preview-Images/Web-app/10.png) | ![Settings & Profile](Preview-Images/Web-app/12.png) |
-| Generate and download professional PDF reports      | User profile management and application settings     |
+![Reports](Preview-Images/Web-app/10.png)
+![Settings](Preview-Images/Web-app/12.png)
 
 ---
 
 ### 🖥️ Desktop Application
 
-_Native PyQt5 application with Matplotlib charts, teal-slate theme, and local data analysis_
-
-| Login Screen                                         | Signup Screen                                       |
-| ---------------------------------------------------- | --------------------------------------------------- |
-| ![Desktop Login](Preview-Images/Dekstop-app/1.png)   | ![Desktop Signup](Preview-Images/Dekstop-app/3.png) |
-| Desktop authentication interface with modern styling | User registration interface for desktop application |
-
-![Analytics Dashboard](Preview-Images/Dekstop-app/2.png)
-_Main dashboard with Matplotlib charts and data visualization_
-
-![Data Table View](Preview-Images/Dekstop-app/4.png)
-_Tabbed interface showing equipment records and logs_
+![Login](Preview-Images/Dekstop-app/1.png)
+![Dashboard](Preview-Images/Dekstop-app/2.png)
+![Signup](Preview-Images/Dekstop-app/3.png)
+![Data View](Preview-Images/Dekstop-app/4.png)
 
 ---
 
 ### 📄 PDF Report Generation
 
-_Professional PDF reports with charts, tables, and company branding_
-
-![PDF Report Cover](Preview-Images/PDF/1.png)
-_Professional title page with dataset information and branding_
-
-![PDF Report Analysis](Preview-Images/PDF/2.png)
-_Comprehensive data tables, statistical charts, and equipment metrics_
+![Cover](Preview-Images/PDF/1.png)
+![Analysis](Preview-Images/PDF/2.png)
 
 </div>
 
