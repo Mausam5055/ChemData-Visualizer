@@ -46,32 +46,14 @@ The platform enables chemical engineers and operators to monitor equipment perfo
 
 ### 🌐 Web Application Screenshots
 
-#### 🔐 Authentication
-
-![Login](Preview-Images/Web-app/1.png)
-![Signup](Preview-Images/Web-app/2.png)
-
-#### 📊 Dashboard & Analytics
-
-![Dashboard](Preview-Images/Web-app/3.png)
-![Analytics](Preview-Images/Web-app/5.png)
-![Statistics](Preview-Images/Web-app/6.png)
-
-#### 📂 Data Management
-
-![Upload](Preview-Images/Web-app/4.png)
-![Datasets](Preview-Images/Web-app/7.png)
-
-#### 📈 Data Analysis
-
-![Trends](Preview-Images/Web-app/8.png)
-![Correlation](Preview-Images/Web-app/9.png)
-![Table](Preview-Images/Web-app/11.png)
-
-#### 📄 Reports & Settings
-
-![Reports](Preview-Images/Web-app/10.png)
-![Settings](Preview-Images/Web-app/12.png)
+|                                      |                                      |
+| ------------------------------------ | ------------------------------------ |
+| ![1](Preview-Images/Web-app/1.png)   | ![2](Preview-Images/Web-app/2.png)   |
+| ![3](Preview-Images/Web-app/3.png)   | ![4](Preview-Images/Web-app/4.png)   |
+| ![5](Preview-Images/Web-app/5.png)   | ![6](Preview-Images/Web-app/6.png)   |
+| ![7](Preview-Images/Web-app/7.png)   | ![8](Preview-Images/Web-app/8.png)   |
+| ![9](Preview-Images/Web-app/9.png)   | ![10](Preview-Images/Web-app/10.png) |
+| ![11](Preview-Images/Web-app/11.png) | ![12](Preview-Images/Web-app/12.png) |
 
 ---
 
