@@ -95,7 +95,15 @@ export default function Dashboard({ onSelect }) {
                      <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Welcome Back</h1>
                      <p className="text-slate-500 mt-1">Manage your chemical process datasets and generate insights.</p>
                 </div>
-                <div className="flex gap-3 items-center">
+                <div className="flex gap-3 items-center justify-end">
+                     <a 
+                        href="https://drive.google.com/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl font-medium text-sm hover:bg-slate-50 transition-colors shadow-sm"
+                     >
+                        Documentation
+                     </a>
                      {user && (
                         <div className="relative">
                             <button 
@@ -136,15 +144,6 @@ export default function Dashboard({ onSelect }) {
                             )}
                         </div>
                      )}
-
-                     <a 
-                        href="https://drive.google.com/" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl font-medium text-sm hover:bg-slate-50 transition-colors shadow-sm"
-                     >
-                        Documentation
-                     </a>
                 </div>
             </div>
 
