@@ -206,16 +206,16 @@ CORS_ALLOW_CREDENTIALS = True
 
 Click **"Environment"** tab and add:
 
-| Key                         | Value                           | Notes                              |
-| --------------------------- | ------------------------------- | ---------------------------------- |
-| `PYTHON_VERSION`            | `3.10.12`                       | Match your local version           |
-| `SECRET_KEY`                | Generate strong key             | Use Django secret key generator    |
-| `DEBUG`                     | `False`                         | Security: Never True in production |
-| `ALLOWED_HOSTS`             | `chemdata-backend.onrender.com` | Your Render domain                 |
-| `CORS_ALLOWED_ORIGINS`      | `https://yourapp.vercel.app`    | Add after Vercel deployment        |
-| `DJANGO_SUPERUSER_USERNAME` | `admin`                         | **NEW:** Auto-creates superuser    |
-| `DJANGO_SUPERUSER_EMAIL`    | `admin@example.com`             | **NEW:** Auto-creates superuser    |
-| `DJANGO_SUPERUSER_PASSWORD` | `your-strong-password`          | **NEW:** Auto-creates superuser    |
+| Key                         | Value                                     | Notes                              |
+| --------------------------- | ----------------------------------------- | ---------------------------------- |
+| `PYTHON_VERSION`            | `3.10.12`                                 | Match your local version           |
+| `SECRET_KEY`                | Generate strong key                       | Use Django secret key generator    |
+| `DEBUG`                     | `False`                                   | Security: Never True in production |
+| `ALLOWED_HOSTS`             | `chemdata-visualizer.onrender.com`        | Your Render domain                 |
+| `CORS_ALLOWED_ORIGINS`      | `https://chem-data-visualizer.vercel.app` | Add after Vercel deployment        |
+| `DJANGO_SUPERUSER_USERNAME` | `admin`                                   | **NEW:** Auto-creates superuser    |
+| `DJANGO_SUPERUSER_EMAIL`    | `admin@example.com`                       | **NEW:** Auto-creates superuser    |
+| `DJANGO_SUPERUSER_PASSWORD` | `your-strong-password`                    | **NEW:** Auto-creates superuser    |
 
 **Generate SECRET_KEY:**
 
@@ -237,7 +237,7 @@ Once deployed, test your API:
 
 ```bash
 # Get your Render URL
-curl https://chemdata-backend.onrender.com/api/datasets/
+curl https://chemdata-visualizer.onrender.com/api/datasets/
 
 # Should return 401 Unauthorized (good - auth is working)
 ```
@@ -251,7 +251,7 @@ Use **UptimeRobot** to prevent spin-down:
 3. Configure:
    - **Monitor Type**: HTTP(s)
    - **Friendly Name**: ChemData Backend
-   - **URL**: `https://your-app.onrender.com/api/datasets/`
+   - **URL**: `https://chemdata-visualizer.onrender.com/`
    - **Monitoring Interval**: Every 10 minutes (minimum)
 
 > [!NOTE]
@@ -306,10 +306,10 @@ const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
 Click **"Environment Variables"** and add:
 
-| Name                    | Value                                   | Notes                                       |
-| ----------------------- | --------------------------------------- | ------------------------------------------- |
-| `VITE_API_URL`          | `https://chemdata-backend.onrender.com` | Your Render backend URL (no trailing slash) |
-| `VITE_GOOGLE_CLIENT_ID` | `your-client-id`                        | Optional: For Google OAuth                  |
+| Name                    | Value                                      | Notes                                       |
+| ----------------------- | ------------------------------------------ | ------------------------------------------- |
+| `VITE_API_URL`          | `https://chemdata-visualizer.onrender.com` | Your Render backend URL (no trailing slash) |
+| `VITE_GOOGLE_CLIENT_ID` | `your-client-id`                           | Optional: For Google OAuth                  |
 
 > [!IMPORTANT]
 > Environment variables in Vite MUST be prefixed with `VITE_` to be accessible in browser.
@@ -317,7 +317,7 @@ Click **"Environment Variables"** and add:
 5. **Deploy**
    - Click **"Deploy"**
    - Wait 2-5 minutes for build
-   - Get your deployment URL (e.g., `https://chemdata.vercel.app`)
+   - Get your deployment URL (e.g., `https://chem-data-visualizer.vercel.app`)
 
 ### Step 3: Update Backend CORS Settings
 
@@ -326,7 +326,7 @@ Click **"Environment Variables"** and add:
 3. Click **"Environment"**
 4. Update `CORS_ALLOWED_ORIGINS`:
    ```
-   https://chemdata.vercel.app,https://www.chemdata.vercel.app
+   https://chem-data-visualizer.vercel.app,https://www.chem-data-visualizer.vercel.app
    ```
 5. Save and wait for automatic redeploy
 
@@ -341,8 +341,8 @@ Click **"Environment Variables"** and add:
 ```python
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",          # Local development
-    "https://chemdata.vercel.app",    # Production
-    "https://www.chemdata.vercel.app", # With www
+    "https://chem-data-visualizer.vercel.app",    # Production
+    "https://www.chem-data-visualizer.vercel.app", # With www
 ]
 
 # Or for testing (NOT recommended for production)
@@ -353,7 +353,7 @@ Commit and push changes - Render will auto-redeploy.
 
 ### Verify Integration
 
-1. Open your Vercel URL: `https://chemdata.vercel.app`
+1. Open your Vercel URL: `https://chem-data-visualizer.vercel.app`
 2. Try to login or register
 3. Check browser console (F12) for errors:
    - **CORS errors** → Update backend CORS settings
@@ -450,7 +450,7 @@ pyinstaller --noconsole --onefile \
 Edit `config.py` before building:
 
 ```python
-API_URL = "https://chemdata-backend.onrender.com/api/"
+API_URL = "https://chemdata-visualizer.onrender.com/api/"
 ```
 
 ### Distribution

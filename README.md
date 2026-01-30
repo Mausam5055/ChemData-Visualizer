@@ -24,6 +24,17 @@
 
 ---
 
+## 🚀 Live Demo
+
+| Component              | URL                                                                                    | Status                                                                                                                                                   |
+| ---------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Frontend (Web App)** | [https://chem-data-visualizer.vercel.app/](https://chem-data-visualizer.vercel.app/)   | [![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=flat-square&logo=vercel&logoColor=white)](https://chem-data-visualizer.vercel.app/) |
+| **Backend (API)**      | [https://chemdata-visualizer.onrender.com/](https://chemdata-visualizer.onrender.com/) | [![Render](https://img.shields.io/badge/Render-Online-46E3B7?style=flat-square&logo=render&logoColor=white)](https://chemdata-visualizer.onrender.com/)  |
+
+> **Note:** The backend is hosted on Render's free tier and may take ~50 seconds to spin up if it has been inactive. Please be patient on the first request!
+
+---
+
 ## 📋 Overview
 
 **ChemData Visualizer** is a comprehensive, enterprise-grade full-stack application designed for real-time monitoring, analysis, and visualization of chemical equipment data. The platform provides:
