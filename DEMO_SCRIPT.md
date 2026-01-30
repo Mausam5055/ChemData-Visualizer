@@ -1,105 +1,94 @@
-# 🎥 3-Minute Demo Script: ChemData Visualizer Screening Test
+# 🎥 3-Minute Demo Script: Hybrid Chemical Equipment Visualizer
 
 **Total Time:** ~3:00 minutes  
-**Goal:** Showcase full-stack capabilities, cross-platform support, deployment, and architecture.
+**Goal:** Demonstrate a fully functional **Hybrid Application** (Web + Desktop) built with Django, React, and PyQt5, specifically for the Intern Screening Task.
 
 ---
 
-## ⏱️ 0:00 - 0:45 | Web Frontend & Dashboard
+## ⏱️ 0:00 - 0:30 | Introduction & Hybrid Architecture
 
-**(Action: Open Web Browser to Vercel URL or Localhost)**
+**(Action: Show GitHub Repo README Diagram)**
 
 **Speaker:**  
-"Hi, I'm [Your Name]. This is **ChemData Visualizer**, a comprehensive platform for monitoring chemical equipment data. Let's start with the **Web Application**."
+"Hi, I'm [Your Name]. This is my submission for the **Chemical Equipment Parameter Visualizer**.  
+I've engineered a robust **Hybrid Application** architecture where a single **Django REST Framework** backend powers two distinct frontends:
 
-**(Action: Log in with user credentials)**  
-"I'll log in to the secure dashboard. This is built with **React 19, Vite, and TailwindCSS** for a responsive, modern UI."
-
-**(Action: Navigate Dashboard, Hover over Graphs)**  
-"Here is the main dashboard. We have real-time interactive charts powered by **Chart.js**.
-
-- We can see the **Equipment Distribution** (Donut Chart).
-- analyze **Pressure vs. Flow Rate** correlations (Scatter Plot).
-- and track **Temperature Trends** over time (Line Chart).  
-  The interface is fully responsive and supports dark mode."
+1.  A **React.js** Web Application for browser access.
+2.  A **PyQt5** Desktop Application for native execution.  
+    Both consume the same API to visualize equipment data like Flowrate, Pressure, and Temperature."
 
 ---
 
-## ⏱️ 0:45 - 1:15 | Desktop Application (Cross-Platform)
+## ⏱️ 0:30 - 1:15 | Web Application (React + Chart.js)
 
-**(Action: Switch to Desktop App Window)**
+**(Action: Open Web Browser - Login Page)**
 
 **Speaker:**  
-"Now, for engineers in the field without reliable internet, we have the **Native Desktop Application** built with **Python and PyQt5**."
+"Starting with the **Web Frontend**. I've implemented secure **JWT Authentication**. Let me log in."
 
-**(Action: Show Desktop App Dashboard)**  
-"It shares the exact same backend API but provides a native experience. You can see the same data points being visualized here using **Matplotlib** for high-performance plotting."
+**(Action: Dashboard - Upload 'sample_equipment_data.csv')**  
+"The core feature is the **CSV Upload** mechanism. I'll upload the required `sample_equipment_data.csv`.  
+The backend uses **Pandas** to parse this file and generate a **Data Summary API** response."
 
-**(Action: Click a few tabs/buttons)**  
-"It supports local analytics and offers a robust, offline-capable interface that stays in sync with our central database."
+**(Action: Show Charts & History)**  
+"Here, **Chart.js** renders the analytics:
+
+- **Equipment Distribution** (Donut Chart).
+- **Correlation Analysis** (Scatter Plots).  
+  Crucially, the system implements **History Management**, persisted in SQLite, allowing users to revisit their last 5 uploaded datasets instantly."
 
 ---
 
-## ⏱️ 1:15 - 1:45 | Reporting & Admin Panel
+## ⏱️ 1:15 - 1:45 | Desktop Application (PyQt5 + Matplotlib)
 
-**(Action: Go back to Web App -> Click 'Download Report')**
+**(Action: Switch to Desktop App)**
 
 **Speaker:**  
-"Reporting is critical. I'll generate a PDF report for this dataset. This is generated server-side using **ReportLab**."
+"Seamlessly switching to the **Desktop Frontend**. This is built with **PyQt5**."
 
-**(Action: Open the downloaded PDF)**  
-"The PDF includes professional branding, statistical summaries, and embedded charts—ready for stakeholders."
-
-**(Action: Switch to Django Admin Panel - /admin)**  
-"All this data is managed securely. Here in the **Django Admin Panel**, you can see our 'Datasets' and 'Equipment Records'. This proves our data persistence is working correctly across all platforms."
+**(Action: Login & View same data)**  
+"I'll log in with the same credentials. Notice that the data I just uploaded on the web is immediately available here.  
+Instead of browser charting, we use **Matplotlib** for high-performance, native plotting of the same statistical summaries. This demonstrates true cross-platform data synchronization."
 
 ---
 
-## ⏱️ 1:45 - 2:20 | Docker & Deployment
+## ⏱️ 1:45 - 2:15 | Reporting & Admin Control
 
-**(Action: Open Terminal/VS Code showing `docker-compose.yml` and logs)**
+**(Action: Web App -> Download PDF)**
 
 **Speaker:**  
-"Under the hood, the entire stack is **Containerized**.  
-Here is my `docker-compose.yml` handling the **React Frontend**, **Django Backend**, and **Database** services."
+"For reporting, I've integrated a **PDF Generation** feature.  
+This automates the creation of a professional report containing statistical summaries and equipment lists, ready for stakeholders."
 
-**(Action: Show 'docker stats' or running logs)**  
-"This ensures the application runs consistently in any environment—dev or prod—eliminating 'it works on my machine' issues."
-
-**(Action: Switch Browser to Deployed Sites)**  
-"For production:
-
-- The **Frontend** is deployed on **Vercel** for global edge delivery.
-- The **Backend** is hosted on **Render** (or your specific cloud provider)."
+**(Action: Django Admin Panel - /admin)**  
+"On the backend, the **Django Admin Panel** provides granular control.  
+I can manage **Registered Users** and inspect the raw **Equipment Records** stored in the database, ensuring data integrity across the system."
 
 ---
 
-## ⏱️ 2:20 - 2:40 | Monitoring & Stability
+## ⏱️ 2:15 - 2:40 | Docker & Deployment
 
-**(Action: Show Uptime Robot Dashboard)**
+**(Action: Show VS Code - docker-compose.yml)**
 
 **Speaker:**  
-"To ensure reliability, I use **Uptime Robot** for active monitoring."
+"To ensure reproducibility, the entire stack is **Dockerized**.  
+My `docker-compose` configuration orchestrates the Django backend, React frontend, and volume persistence."
 
-**(Action: Point to 'Up' status)**  
-"This tracks our API health 24/7, pinging the endpoints to ensure the service is always available for users."
+**(Action: Show Active Deployment)**  
+"For production, I've deployed the web version live:
+
+- **Frontend** on Vercel.
+- **Backend** on Render.  
+  I also use **Uptime Robot** to monitor API health, currently showing 100% uptime."
 
 ---
 
-## ⏱️ 2:40 - 3:00 | Architecture & Codebase
+## ⏱️ 2:40 - 3:00 | Conclusion
 
-**(Action: Show GitHub Repository Readme/Diagrams)**
+**(Action: Briefly scroll GitHub Repo Code)**
 
 **Speaker:**  
-"Finally, here is the public **GitHub Repository**.  
-I've documented the complete system architecture."
-
-**(Action: Zoom in on Mermaid Diagrams in README)**  
-"We have:
-
-1.  **Dockerized Architecture**: Showing how containers interact via internal networks.
-2.  **Standard Architecture**: Detailing the flow from React/Desktop -> Nginx/API -> Database.
-
-Thank you for watching!"
+"The full source code is available on **GitHub**, complete with a detailed `README.md` covering setup, API endpoints, and architecture diagrams.  
+Thank you for your time and consideration!"
 
 ---
