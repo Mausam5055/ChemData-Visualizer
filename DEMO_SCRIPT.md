@@ -1,94 +1,87 @@
-# 🎥 3-Minute Demo Script: Hybrid Chemical Equipment Visualizer
+# 🎥 3-Minute Fast-Paced Demo Script: Hybrid Chemical Visualizer
 
-**Total Time:** ~3:00 minutes  
-**Goal:** Demonstrate a fully functional **Hybrid Application** (Web + Desktop) built with Django, React, and PyQt5, specifically for the Intern Screening Task.
-
----
-
-## ⏱️ 0:00 - 0:30 | Introduction & Hybrid Architecture
-
-**(Action: Show GitHub Repo README Diagram)**
-
-**Speaker:**  
-"Hi, I'm [Your Name]. This is my submission for the **Chemical Equipment Parameter Visualizer**.  
-I've engineered a robust **Hybrid Application** architecture where a single **Django REST Framework** backend powers two distinct frontends:
-
-1.  A **React.js** Web Application for browser access.
-2.  A **PyQt5** Desktop Application for native execution.  
-    Both consume the same API to visualize equipment data like Flowrate, Pressure, and Temperature."
+**Total Time:** ~2:30 - 3:00 minutes  
+**Goal:** Show, don't just tell. Jump straight into the application features as requested.
 
 ---
 
-## ⏱️ 0:30 - 1:15 | Web Application (React + Chart.js)
+## ⏱️ 0:00 - 0:50 | Web Application (The Core Workflow)
 
-**(Action: Open Web Browser - Login Page)**
+**(Action: Start recording on the Login Page. speak immediately.)**
 
 **Speaker:**  
-"Starting with the **Web Frontend**. I've implemented secure **JWT Authentication**. Let me log in."
+"Hi, I'm [Your Name]. This is my **Hybrid Chemical Equipment Visualizer**. Let's jump straight in.
 
-**(Action: Dashboard - Upload 'sample_equipment_data.csv')**  
-"The core feature is the **CSV Upload** mechanism. I'll upload the required `sample_equipment_data.csv`.  
-The backend uses **Pandas** to parse this file and generate a **Data Summary API** response."
+**(Action: Log in -> Dashboard)**  
+"I'm logging into the **React + Vite Frontend**.
+First, I'll demonstrate the **CSV Upload**. I'm selecting the required `sample_equipment_data.csv`."
 
-**(Action: Show Charts & History)**  
-"Here, **Chart.js** renders the analytics:
+**(Action: Upload File -> Show Success)**  
+"The **Django Backend** parses this using **Pandas** and instantly returns the analytics."
 
-- **Equipment Distribution** (Donut Chart).
-- **Correlation Analysis** (Scatter Plots).  
-  Crucially, the system implements **History Management**, persisted in SQLite, allowing users to revisit their last 5 uploaded datasets instantly."
+**(Action: Hover over Charts)**  
+"Here are the visualizations using **Chart.js**:
+
+- **Distribution** by Equipment Type.
+- **Correlation** between Pressure and Flowrate.
+- And **Temperature Trends** over time."
+
+**(Action: Show History Dropdown/List)**  
+"We also have **History Management**, saving the last 5 uploads for quick access."
 
 ---
 
-## ⏱️ 1:15 - 1:45 | Desktop Application (PyQt5 + Matplotlib)
+## ⏱️ 0:50 - 1:20 | Desktop Application (Cross-Platform Sync)
 
-**(Action: Switch to Desktop App)**
+**(Action: Alt-Tab to the Desktop App Window)**
 
 **Speaker:**  
-"Seamlessly switching to the **Desktop Frontend**. This is built with **PyQt5**."
+"Now, switching to the **Desktop Application** built with **PyQt5**."
 
-**(Action: Login & View same data)**  
-"I'll log in with the same credentials. Notice that the data I just uploaded on the web is immediately available here.  
-Instead of browser charting, we use **Matplotlib** for high-performance, native plotting of the same statistical summaries. This demonstrates true cross-platform data synchronization."
+**(Action: Login & Click 'Refresh' or load the same dataset)**  
+"I'm logging in with the same credentials.
+Notice how the data I just uploaded on the web is **immediately available here**.
+This proves the shared backend integration."
+
+**(Action: Show Matplotlib Charts)**  
+"Instead of web charts, we're using native **Matplotlib** figures here for high-performance offline analysis."
 
 ---
 
-## ⏱️ 1:45 - 2:15 | Reporting & Admin Control
+## ⏱️ 1:20 - 1:50 | Reporting & Admin Panel
 
-**(Action: Web App -> Download PDF)**
+**(Action: Switch back to Web App -> Click 'Download PDF')**
 
 **Speaker:**  
-"For reporting, I've integrated a **PDF Generation** feature.  
-This automates the creation of a professional report containing statistical summaries and equipment lists, ready for stakeholders."
+"For reporting, I'll generate a **PDF Report**.
+This is created server-side with **ReportLab**, containing all critical statistics and equipment lists."
 
-**(Action: Django Admin Panel - /admin)**  
-"On the backend, the **Django Admin Panel** provides granular control.  
-I can manage **Registered Users** and inspect the raw **Equipment Records** stored in the database, ensuring data integrity across the system."
+**(Action: Open PDF briefly, then Switch to /admin)**  
+"On the backend control side, here is the **Django Admin Panel**."
+
+**(Action: Click 'Equipment Records' then 'Users')**  
+"I can inspect the raw **Equipment Records** and manage **Registered Users** directly, ensuring full control over the system's data integrity."
 
 ---
 
-## ⏱️ 2:15 - 2:40 | Docker & Deployment
+## ⏱️ 1:50 - 2:30 | Deployment & Architecture
 
-**(Action: Show VS Code - docker-compose.yml)**
-
-**Speaker:**  
-"To ensure reproducibility, the entire stack is **Dockerized**.  
-My `docker-compose` configuration orchestrates the Django backend, React frontend, and volume persistence."
-
-**(Action: Show Active Deployment)**  
-"For production, I've deployed the web version live:
-
-- **Frontend** on Vercel.
-- **Backend** on Render.  
-  I also use **Uptime Robot** to monitor API health, currently showing 100% uptime."
-
----
-
-## ⏱️ 2:40 - 3:00 | Conclusion
-
-**(Action: Briefly scroll GitHub Repo Code)**
+**(Action: Show 'docker-compose.yml' in VS Code)**
 
 **Speaker:**  
-"The full source code is available on **GitHub**, complete with a detailed `README.md` covering setup, API endpoints, and architecture diagrams.  
-Thank you for your time and consideration!"
+"The entire stack is **Containerized** using Docker.
+My `docker-compose` setup orchestrates the Django API, React Frontend, and Database volumes."
+
+**(Action: Show Browser Tabs: Vercel & Render)**  
+"For production:
+
+- The Web App is live on **Vercel**.
+- The API is hosted on **Render**.
+- And **Uptime Robot** confirms our 100% availability."
+
+**(Action: Show GitHub Repo & Diagram)**  
+"Finally, the **GitHub Repository** contains the full source code and this detailed **Architecture Diagram** explaining the hybrid data flow.
+
+Thank you!"
 
 ---
