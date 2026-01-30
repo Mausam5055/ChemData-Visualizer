@@ -206,13 +206,16 @@ CORS_ALLOW_CREDENTIALS = True
 
 Click **"Environment"** tab and add:
 
-| Key                    | Value                           | Notes                              |
-| ---------------------- | ------------------------------- | ---------------------------------- |
-| `PYTHON_VERSION`       | `3.10.12`                       | Match your local version           |
-| `SECRET_KEY`           | Generate strong key             | Use Django secret key generator    |
-| `DEBUG`                | `False`                         | Security: Never True in production |
-| `ALLOWED_HOSTS`        | `chemdata-backend.onrender.com` | Your Render domain                 |
-| `CORS_ALLOWED_ORIGINS` | `https://yourapp.vercel.app`    | Add after Vercel deployment        |
+| Key                         | Value                           | Notes                              |
+| --------------------------- | ------------------------------- | ---------------------------------- |
+| `PYTHON_VERSION`            | `3.10.12`                       | Match your local version           |
+| `SECRET_KEY`                | Generate strong key             | Use Django secret key generator    |
+| `DEBUG`                     | `False`                         | Security: Never True in production |
+| `ALLOWED_HOSTS`             | `chemdata-backend.onrender.com` | Your Render domain                 |
+| `CORS_ALLOWED_ORIGINS`      | `https://yourapp.vercel.app`    | Add after Vercel deployment        |
+| `DJANGO_SUPERUSER_USERNAME` | `admin`                         | **NEW:** Auto-creates superuser    |
+| `DJANGO_SUPERUSER_EMAIL`    | `admin@example.com`             | **NEW:** Auto-creates superuser    |
+| `DJANGO_SUPERUSER_PASSWORD` | `your-strong-password`          | **NEW:** Auto-creates superuser    |
 
 **Generate SECRET_KEY:**
 
@@ -224,7 +227,9 @@ print(get_random_secret_key())
 5. **Deploy**
    - Click **"Create Web Service"**
    - Wait 5-10 minutes for initial deployment
+   - Wait 5-10 minutes for initial deployment
    - Check logs for errors
+   - **Note:** The build script will automatically run `python create_superuser.py`. If you set the `DJANGO_SUPERUSER_...` variables, your admin account will be ready immediately.
 
 ### Step 3: Test Backend API
 
