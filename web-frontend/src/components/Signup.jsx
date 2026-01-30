@@ -7,6 +7,7 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,6 +16,7 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
             setError("Passwords don't match");
             return;
         }
+        setLoading(true);
         try {
             const response = await api.post('auth/registration/', { username, email, password1: password, password2: confirmPassword });
             if (response.data.key) {
@@ -24,6 +26,8 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
             }
         } catch (err) {
             setError(JSON.stringify(err.response?.data) || 'Registration failed');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -39,7 +43,15 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
                     </div>
 
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
-                    <p className="text-gray-500 mb-8">Join us to visualize your data efficiently.</p>
+                    <p className="text-gray-500 mb-6">Join us to visualize your data efficiently.</p>
+
+                    {/* Cold Start Warning */}
+                    <div className="mb-6 p-3 bg-amber-50 border border-amber-200 rounded-lg flex gap-3">
+                         <svg className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                         <div className="text-sm text-amber-800">
+                            <strong>Note:</strong> The backend is hosted on a free instance and may take <strong>~50 seconds</strong> to wake up after sign up.
+                         </div>
+                    </div>
 
                     <form className="space-y-4" onSubmit={handleSubmit}>
                         <div>
@@ -91,9 +103,20 @@ export default function Signup({ onLogin, onSwitchToLogin }) {
 
                         <button 
                             type="submit" 
-                            className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 mt-4"
+                            disabled={loading}
+                            className="w-full bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 mt-4"
                         >
-                            Sign Up
+                            {loading ? (
+                                <>
+                                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Creating Account...
+                                </>
+                            ) : (
+                                "Sign Up"
+                            )}
                         </button>
                     </form>
 
