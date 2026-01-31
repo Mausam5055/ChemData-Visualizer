@@ -35,6 +35,17 @@
 
 ---
 
+## 🎥 Project Demo Video (FOSEE)
+
+<div align="center">
+  <video src="./Fossee%20Demo%20By%20Mausam%20Kar.mp4" width="80%" controls></video>
+  <p>
+    <em>If the video doesn't play, <a href="./Fossee%20Demo%20By%20Mausam%20Kar.mp4">click here to download</a>.</em>
+  </p>
+</div>
+
+---
+
 ## 📋 Overview
 
 **ChemData Visualizer** is a comprehensive, enterprise-grade full-stack application designed for real-time monitoring, analysis, and visualization of chemical equipment data. The platform provides:
