@@ -97,7 +97,89 @@ The platform enables chemical engineers and operators to monitor equipment perfo
 
 ---
 
-## 🏗️ System Architecture
+## � FOSSEE Demo Video
+
+<div align="center">
+
+> **📹 This demo video was created for the FOSSEE Internship Screening Task**
+
+[![Watch on YouTube](https://img.shields.io/badge/▶️_YouTube-Watch_Now-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/9kFyRLsweRA)
+[![Google Drive](https://img.shields.io/badge/📁_Drive-Download-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1SDkOp-IpvFo-EOf707fh_TVZyEZjbE1L/view?usp=drive_link)
+
+</div>
+
+### 📹 What's Demonstrated
+
+This comprehensive video walkthrough showcases the complete **ChemData Visualizer** platform:
+
+<table>
+<tr>
+<td width="50%">
+
+**🌐 Web Application**
+
+- React-based responsive dashboard
+- Real-time data analytics
+- Interactive Chart.js visualizations
+- Modern TailwindCSS styling
+
+</td>
+<td width="50%">
+
+**🖥️ Desktop Application**
+
+- PyQt5 native interface
+- Local data analysis
+- Matplotlib chart generation
+- CSV upload and processing
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**📊 Data Features**
+
+- Equipment type distribution
+- Statistical analysis (avg, min, max)
+- Trend visualization over time
+- Correlation analysis
+
+</td>
+<td width="50%">
+
+**📑 Advanced Capabilities**
+
+- Professional PDF report generation
+- JWT authentication system
+- RESTful API integration
+- Multi-user dataset management
+
+</td>
+</tr>
+</table>
+
+### 🎬 Viewing Options
+
+| Option              | Platform      | Access Method                                                                                                                                |
+| ------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **🔴 YouTube**      | Web Browser   | Click the YouTube badge above or visit [youtu.be/9kFyRLsweRA](https://youtu.be/9kFyRLsweRA)                                                  |
+| **💾 Google Drive** | Cloud Storage | Click the Drive badge above or [direct download link](https://drive.google.com/file/d/1SDkOp-IpvFo-EOf707fh_TVZyEZjbE1L/view?usp=drive_link) |
+| **📁 Local File**   | Repository    | Download [`Fossee Demo By Mausam Kar.mp4`](./Fossee%20Demo%20By%20Mausam%20Kar.mp4) (85 MB)                                                  |
+
+### 📊 Video Information
+
+| Specification  | Details                                        |
+| -------------- | ---------------------------------------------- |
+| **Format**     | MP4 (H.264)                                    |
+| **Duration**   | ~5-10 minutes                                  |
+| **File Size**  | ~85 MB                                         |
+| **Resolution** | 1080p HD                                       |
+| **Purpose**    | FOSSEE Internship Screening Task Demonstration |
+
+---
+
+## �🏗️ System Architecture
 
 ### 🎯 High-Level Overview
 
@@ -1027,48 +1109,6 @@ Contributions are welcome! Please follow these steps:
 - **Python**: Follow PEP 8, use Black formatter
 - **JavaScript**: Follow Airbnb style guide, use ESLint
 - **Commits**: Use conventional commits format
-
----
-
-## 🎥 Demo Video
-
-> **Note:** This is a demo video made for the **FOSSEE internship screening task**.
-
-### 📹 About This Demo
-
-This video walkthrough demonstrates the **ChemData Visualizer** platform, showcasing:
-
-- 🌐 **Web Application** - React-based dashboard with real-time analytics
-- 🖥️ **Desktop Application** - PyQt5 native app for local analysis
-- 📊 **Data Visualization** - Interactive charts and statistical analysis
-- 📑 **PDF Report Generation** - Professional reporting capabilities
-- 🔐 **Authentication System** - Secure user management
-
-### 🎬 How to View
-
-**Option 1: Watch on YouTube**
-
-- Click the YouTube badge at the top of this README
-- Direct Link: [https://youtu.be/9kFyRLsweRA](https://youtu.be/9kFyRLsweRA)
-
-**Option 2: Download from Google Drive**
-
-- Click the Google Drive badge at the top of this README
-- Direct Link: [Google Drive](https://drive.google.com/file/d/1SDkOp-IpvFo-EOf707fh_TVZyEZjbE1L/view?usp=drive_link)
-
-**Option 3: Local File**
-
-- Download from repository: [`Fossee Demo By Mausam Kar.mp4`](./Fossee%20Demo%20By%20Mausam%20Kar.mp4)
-- Open with your preferred media player (VLC, Windows Media Player, QuickTime, etc.)
-
-### 📊 Demo Statistics
-
-| Detail       | Value                            |
-| ------------ | -------------------------------- |
-| **Format**   | MP4                              |
-| **Duration** | ~5-10 minutes                    |
-| **Size**     | ~85 MB                           |
-| **Purpose**  | FOSSEE Internship Screening Task |
 
 ---
 
