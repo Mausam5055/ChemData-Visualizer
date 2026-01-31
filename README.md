@@ -8,6 +8,9 @@
 [![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)](https://github.com)
 [![License](https://img.shields.io/badge/license-MIT-orange?style=for-the-badge)](LICENSE)
 [![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://chem-data-visualizer.vercel.app/)
+[![Render](https://img.shields.io/badge/Render-Online-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://chemdata-visualizer.onrender.com/)
+[![UptimeRobot](https://img.shields.io/badge/Uptime-Monitor-3bd671?style=for-the-badge&logo=uptimerobot&logoColor=white)](https://uptimerobot.com)
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-5.0-092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
