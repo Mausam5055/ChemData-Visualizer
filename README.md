@@ -24,7 +24,7 @@
 ### 🎥 **FOSSEE Internship Demo Video**
 
 [![Watch on YouTube](https://img.shields.io/badge/▶️_YouTube-Watch_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/9kFyRLsweRA?si=UWRJfgdQppb1a8Ay)
-[![Google Drive](https://img.shields.io/badge/📁_Google_Drive-Download-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1SDkOp-IpvFo-EOf707fh_TVZyEZjbE1L/view?usp=drive_link)
+[![Google Drive](https://img.shields.io/badge/📁_Google_Drive-Download-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1TfT6riZEkhuFIQfXRta_f8VSq1v6amiE/view?usp=drive_link)
 
 > 🎬 Demo video created for **FOSSEE Internship Screening Task**
 
@@ -95,6 +95,14 @@ The platform enables chemical engineers and operators to monitor equipment perfo
 |                                |                                |
 | ------------------------------ | ------------------------------ |
 | ![1](Preview-Images/PDF/1.png) | ![2](Preview-Images/PDF/2.png) |
+
+---
+
+### 🚀 Deployed Dashboard Previews
+
+| Vercel Deployment                                          | Render Deployment                                          |
+| ---------------------------------------------------------- | ---------------------------------------------------------- |
+| ![Vercel Dashboard](Preview-Images/Vercel%20Dashboard.png) | ![Render Dashboard](Preview-Images/Render%20Dashboard.png) |
 
 </div>
 
